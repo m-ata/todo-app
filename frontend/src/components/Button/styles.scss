@@ -1,0 +1,28 @@
+button {
+  background-color: $blue;
+  padding: 12px;
+  margin: 16px;
+  border-radius: 25px;
+  white-space: nowrap;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    background-color: $darkBlue;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+
+  span {
+    color: $white;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    font-weight: 600;
+  }
+}

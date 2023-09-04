@@ -1,9 +1,10 @@
 import './App.scss';
+import Header from '@components/Header';
 
 const App = () => {
   return (
     <div className="container">
-      <h5> Welcome to Todo App </h5>
+      <Header />
     </div>
   );
 };

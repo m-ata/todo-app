@@ -10,4 +10,14 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components/'),
     }
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @import "./src/styles/variables.scss";
+        @import "./src/styles/global.scss";
+        `,
+      }
+    }
+  }
 });
