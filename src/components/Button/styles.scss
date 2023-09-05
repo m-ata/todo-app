@@ -1,0 +1,40 @@
+.btn {
+  padding: 12px;
+  border-radius: 25px;
+  white-space: nowrap;
+  min-width: 100px;
+  display: flex;
+  justify-content: center;
+
+  &.primary {
+    background-color: $blue;
+
+    &:hover {
+      background-color: $darkBlue;
+    }
+
+    span {
+      color: $white;
+    }
+  }
+
+  &.secondary {
+    background-color: $lightGray;
+    span {
+      color: $black;
+    }
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+    margin-right: 4px;
+  }
+
+  span {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    font-weight: 600;
+  }
+}

@@ -8,6 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
+    "types": ["vite/client", "node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -27,7 +28,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*", "./dist/*"],
-      "@components/*": ["src/components/*"] 
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@interfaces/*": ["src/interfaces/*"],
     }
   },
   "include": ["src"],
