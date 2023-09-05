@@ -49,7 +49,6 @@ rules:
     - warn
     - location: anywhere
       terms:
-        - todo
         - fixme
   prefer-promise-reject-errors: error
   semi: error
