@@ -31,6 +31,8 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@interfaces/*": ["src/interfaces/*"],
+      "@redux/*": ["src/redux/*"],
+      "@utils/*": ["src/utils/*"],
     }
   },
   "include": ["src"],
