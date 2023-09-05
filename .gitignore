@@ -1,5 +1,5 @@
 # Dependency directories
-frontend/node_modules/
+node_modules/
 
 # Vite build
 dist
@@ -12,3 +12,5 @@ dist
 
 # Optional eslint cache
 .eslintcache
+
+.DS_Store
