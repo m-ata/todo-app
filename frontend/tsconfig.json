@@ -28,7 +28,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*", "./dist/*"],
-      "@components/*": ["src/components/*"] 
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@interfaces/*": ["src/interfaces/*"],
     }
   },
   "include": ["src"],

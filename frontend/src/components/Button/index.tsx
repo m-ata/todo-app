@@ -4,12 +4,12 @@ import Loader from '/loader.svg';
 import './styles.scss';
 
 const Button: FC<IButtonProps> = (props: IButtonProps) => {
-  const { text, onClick, icon, isLoading = false } = props;
+  const { label, onClick, icon, isLoading = false, category = 'primary', type, } = props;
   return (
-    <button onClick={onClick} disabled={isLoading}>
+    <button type={type} className={`btn ${category}`} onClick={onClick} disabled={isLoading}>
       {isLoading && <img src={Loader} alt="loader" />}
       {icon && <img src={icon} alt="icon" />}
-      <span>{text}</span>
+      <span>{label}</span>
     </button>
   );
 };

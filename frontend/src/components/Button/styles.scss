@@ -1,15 +1,28 @@
-button {
-  background-color: $blue;
+.btn {
   padding: 12px;
-  margin: 16px;
   border-radius: 25px;
   white-space: nowrap;
   min-width: 100px;
   display: flex;
   justify-content: center;
 
-  &:hover {
-    background-color: $darkBlue;
+  &.primary {
+    background-color: $blue;
+
+    &:hover {
+      background-color: $darkBlue;
+    }
+
+    span {
+      color: $white;
+    }
+  }
+
+  &.secondary {
+    background-color: $lightGray;
+    span {
+      color: $black;
+    }
   }
 
   img {
@@ -19,7 +32,6 @@ button {
   }
 
   span {
-    color: $white;
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0.1px;
