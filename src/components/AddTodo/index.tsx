@@ -1,21 +1,27 @@
 import { FC, FormEvent, useCallback, useRef } from 'react';
 import './styles.scss';
 import Button from '../Button';
-import { IAddTodoProps } from '@interfaces/addTodo.interface';
+import { IAddTodoProps, ITodo } from '@interfaces/todo.interface';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '@redux/slices/todo.slice';
+import { parseDateToTimestamp } from '@utils/date.util';
 
 const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
   const taskInputRef = useRef<HTMLInputElement | null>(null);
   const deadlineInputRef = useRef<HTMLInputElement | null>(null);
 
+  const dispatch = useDispatch();
+
   const submitHandler = useCallback((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const data = {
-      task: taskInputRef.current?.value,
-      deadline: deadlineInputRef.current?.value,
+    const data: ITodo = {
+      id: Math.random().toString(36).substr(2, 9),
+      task: taskInputRef.current?.value || '',
+      deadline: parseDateToTimestamp(deadlineInputRef.current?.value || ''),
+      isCompleted: false
     };
-    console.log(data);
-    // add the data to the redux store later
+    dispatch(addTodo(data));
     onClose();
   }, [onClose]);
 

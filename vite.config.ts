@@ -10,6 +10,8 @@ export default defineConfig({
       '@components': path.resolve(__dirname, './src/components/'),
       '@pages': path.resolve(__dirname, './src/pages/'),
       '@interfaces': path.resolve(__dirname, './src/interfaces/'),
+      '@redux': path.resolve(__dirname, './src/redux/'),
+      '@utils': path.resolve(__dirname, './src/utils/'),
     }
   },
   css: {
