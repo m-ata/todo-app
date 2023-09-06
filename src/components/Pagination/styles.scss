@@ -1,0 +1,94 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: rgb(248, 250, 252);
+
+  .page-items {
+    color: $black;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    padding-left: 10px;
+
+    span {
+      @media screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    select {
+      min-width: 50px;
+      border-radius: 5px;
+      height: 24px;
+      width: 75px;
+      border: 2px solid $cyanBlue;
+      background-color: $lightGray;
+      cursor: pointer;
+      color: $black;
+      font-size: 14px;
+      font-weight: 600;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .item-count {
+    color: $black;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .actions {
+    display: flex;
+    padding: 5px 20px 6px 0px;
+    @media screen and (max-width: 767px) {
+      padding: 0px 8px 4px 0px;
+    }
+
+    button {
+      width: 30px;
+      height: 30px;
+      background-color: $lightGray;
+      color: $cyanBlue;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0.1px;
+      padding: 6px;
+      margin-left: 8px;
+      border: 2px solid #0054a6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:disabled {
+        cursor: default;
+        background-color: #f1f5f9;
+        color: #a6b6c8;
+        border: 2px solid #a6b6c8;
+
+        img {
+          filter: invert(91%) sepia(4%) saturate(3222%) hue-rotate(181deg)
+            brightness(85%) contrast(80%);
+        }
+      }
+
+      img {
+        display: flex;
+        justify-content: center;
+        filter: invert(18%) sepia(88%) saturate(2732%) hue-rotate(196deg)
+          brightness(90%) contrast(104%);
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IButtonProps } from '@/interfaces/button.interface';
-import Loader from '/loader.svg';
+import Loader from '/gifs/loader.svg';
 import './styles.scss';
 
 const Button: FC<IButtonProps> = (props: IButtonProps) => {

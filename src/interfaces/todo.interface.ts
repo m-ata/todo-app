@@ -1,10 +1,15 @@
 export interface ITodo {
-    id: string;
-    task: string;
-    deadline: number | null;
-    isCompleted: boolean;
-};
+  id: string;
+  task: string;
+  deadline: number;
+  isCompleted: boolean;
+}
 
 export interface IAddTodoProps {
-    onClose: () => void;
+  onClose: () => void;
+}
+
+export interface ITableProps {
+  columns: string[];
+  data: ITodo[];
 }
