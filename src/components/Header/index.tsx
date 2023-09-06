@@ -1,6 +1,6 @@
 import Button from '@components/Button';
-import TodoIcon from '/todo-list.svg';
-import PlusIcon from '/plus.svg';
+import TodoIcon from '/images/todo-list.svg';
+import PlusIcon from '/icons/plus.svg';
 import './styles.scss';
 import { useState } from 'react';
 import AddTodo from '@components/AddTodo';
