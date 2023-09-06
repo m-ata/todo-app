@@ -1,7 +1,7 @@
 export const APP_ROUTES = {
-  home: "/",
-  todo: "/todo",
-  notFound: "/404",
+  home: '/',
+  todo: '/todo',
+  notFound: '/404',
 };
 
 export const DEFAULT_PAGINATION_OPTIONS = {

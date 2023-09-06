@@ -1,10 +1,10 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import todosReducer from "./../slices/todo.slice";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { combineReducers } from '@reduxjs/toolkit';
+import todosReducer from './../slices/todo.slice';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 const persistTodos = {
-  key: "todos",
+  key: 'todos',
   storage,
 };
 

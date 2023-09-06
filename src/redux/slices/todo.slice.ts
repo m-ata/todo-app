@@ -1,16 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITodo } from "@interfaces/todo.interface";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ITodo } from '@interfaces/todo.interface';
 
 type IinitialState = {
-    todos: ITodo[]
-}
+  todos: ITodo[];
+};
 
 const initialState: IinitialState = {
-    todos: []
+  todos: [],
 };
 
 const todoSlice = createSlice({
-  name: "todos",
+  name: 'todos',
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<ITodo>) => {

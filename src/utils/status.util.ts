@@ -1,5 +1,5 @@
-import { STATUS } from "@/enum/status.enum";
-import { ITodo } from "@/interfaces/todo.interface";
+import { STATUS } from '@/enum/status.enum';
+import { ITodo } from '@/interfaces/todo.interface';
 
 /**
  * Determines the status of a todo item
