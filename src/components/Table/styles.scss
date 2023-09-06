@@ -1,0 +1,98 @@
+.table {
+  width: 100vw;
+  overflow: auto;
+  border-collapse: collapse;
+
+  th {
+    background: $lightBlue;
+    padding: 8px 12px;
+    border-top: 1px solid $skyBlue;
+    border-bottom: 1px solid $skyBlue;
+    font-size: 18px;
+  }
+
+  th,
+  td {
+    color: $black;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.1px;
+    white-space: nowrap;
+    padding: 10px 12px;
+    text-align: left;
+  }
+
+  tbody {
+    tr {
+      background-color: $white;
+      border-bottom: 1px solid $darkGray;
+
+      &:hover {
+        background-color: $silver;
+      }
+
+      :first-child {
+        width: 50%;
+      }
+
+      :last-child {
+        width: 20%;
+      }
+
+      td {
+        font-size: 14px;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+
+        .icon-btn {
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          padding: 5px;
+          border-radius: 6px;
+          margin-left: 8px;
+          background: $white;
+          width: 30px;
+          height: 30px;
+
+          img {
+            width: 20px;
+            height: 20px;
+          }
+
+          &.delete {
+            border: 2px solid $red;
+            margin-left: 0;
+          }
+
+          &.edit {
+            border: 2px solid $blue;
+          }
+
+          &.check {
+            border: 2px solid $darkGray;
+          }
+        }
+
+        .status {
+          padding: 2px 8px;
+          border-radius: 15px;
+          text-transform: capitalize;
+          border: 2px solid;
+          border-color: #459cea;
+          color: #459cea;
+
+          &.overdue {
+            color: $red;
+            border-color: $red;
+          }
+
+          &.completed {
+            color: $green;
+            border-color: $green;
+          }
+        }
+      }
+    }
+  }
+}
