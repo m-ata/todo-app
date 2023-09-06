@@ -1,10 +1,10 @@
-import { DEFAULT_PAGINATION_OPTIONS } from "@/constants";
-import chevronLeft from "/icons/chevron-left.svg";
-import chevronDoubleLeft from "/icons/chevron-double-left.svg";
-import chevronRight from "/icons/chevron-right.svg";
-import chevronDoubleRight from "/icons/chevron-double-right.svg";
+import { DEFAULT_PAGINATION_OPTIONS } from '@/constants';
+import chevronLeft from '/icons/chevron-left.svg';
+import chevronDoubleLeft from '/icons/chevron-double-left.svg';
+import chevronRight from '/icons/chevron-right.svg';
+import chevronDoubleRight from '/icons/chevron-double-right.svg';
 
-import "./styles.scss";
+import './styles.scss';
 
 const Pagination = () => {
   // implementation will be done later
@@ -18,8 +18,8 @@ const Pagination = () => {
         <select value={limit} onChange={(e) => console.log(e.target.value)}>
           {limitOptions.map((option: number) => (
             <option value={option} key={option}>
-              {" "}
-              {option}{" "}
+              {' '}
+              {option}{' '}
             </option>
           ))}
         </select>
@@ -27,30 +27,30 @@ const Pagination = () => {
 
       <div className="item-count">
         <span>
-          {" "}
-          {currentPage} / {Math.ceil(totalPages)}{" "}
+          {' '}
+          {currentPage} / {Math.ceil(totalPages)}{' '}
         </span>
       </div>
 
       <div className="actions">
         <button
           disabled={offset === 0}
-          onClick={() => console.log("Previous Starte")}
+          onClick={() => console.log('Previous Starte')}
         >
           <img src={chevronDoubleLeft} alt="chevron-double-left" />
         </button>
-        <button disabled={offset === 0} onClick={() => console.log("Previous")}>
+        <button disabled={offset === 0} onClick={() => console.log('Previous')}>
           <img src={chevronLeft} alt="chevron-left" />
         </button>
         <button
           disabled={offset + limit >= size}
-          onClick={() => console.log("next")}
+          onClick={() => console.log('next')}
         >
           <img src={chevronRight} alt="chevron-right" />
         </button>
         <button
           disabled={offset + limit >= size}
-          onClick={() => console.log("Next End")}
+          onClick={() => console.log('Next End')}
         >
           <img src={chevronDoubleRight} alt="chevron-double-left" />
         </button>

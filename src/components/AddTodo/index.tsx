@@ -12,18 +12,21 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
 
   const dispatch = useDispatch();
 
-  const submitHandler = useCallback((event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const submitHandler = useCallback(
+    (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
-    const data: ITodo = {
-      id: Math.random().toString(36).substr(2, 9),
-      task: taskInputRef.current?.value || '',
-      deadline: parseDateToTimestamp(deadlineInputRef.current?.value || ''),
-      isCompleted: false
-    };
-    dispatch(addTodo(data));
-    onClose();
-  }, [onClose]);
+      const data: ITodo = {
+        id: Math.random().toString(36).substr(2, 9),
+        task: taskInputRef.current?.value || '',
+        deadline: parseDateToTimestamp(deadlineInputRef.current?.value || ''),
+        isCompleted: false,
+      };
+      dispatch(addTodo(data));
+      onClose();
+    },
+    [onClose, dispatch],
+  );
 
   return (
     <>

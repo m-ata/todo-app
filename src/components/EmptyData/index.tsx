@@ -1,5 +1,5 @@
-import emptyData from "/images/empty-data.svg";
-import "./styles.scss";
+import emptyData from '/images/empty-data.svg';
+import './styles.scss';
 
 const EmptyData = () => {
   return (
