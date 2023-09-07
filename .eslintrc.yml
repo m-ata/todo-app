@@ -53,3 +53,5 @@ rules:
   prefer-promise-reject-errors: error
   semi: error
   react-refresh/only-export-components: warn
+  react-hooks/exhaustive-deps: off
+  react-hooks/rules-of-hooks: error

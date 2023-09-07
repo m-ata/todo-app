@@ -5,7 +5,7 @@
     height: calc(100vh - 125px);
     overflow-y: auto;
     overflow-x: hidden;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
       background: $bluishCyan;
     }
   }

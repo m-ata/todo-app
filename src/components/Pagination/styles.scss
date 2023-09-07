@@ -8,11 +8,7 @@
   background: rgb(248, 250, 252);
 
   .page-items {
-    color: $black;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.1px;
+    @include label(14px);
     padding-left: 10px;
 
     span {
@@ -29,9 +25,7 @@
       border: 2px solid $cyanBlue;
       background-color: $lightGray;
       cursor: pointer;
-      color: $black;
-      font-size: 14px;
-      font-weight: 600;
+      @include label(14px);
 
       &:focus {
         outline: none;
@@ -57,24 +51,16 @@
       width: 30px;
       height: 30px;
       background-color: $lightGray;
-      color: $cyanBlue;
       border-radius: 6px;
-      white-space: nowrap;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 20px;
-      letter-spacing: 0.1px;
       padding: 6px;
       margin-left: 8px;
-      border: 2px solid #0054a6;
+      border: 2px solid $blue;
       display: flex;
       justify-content: center;
       align-items: center;
+      @include label(14px, $cyanBlue, 600, nowrap);
 
       &:disabled {
-        cursor: default;
-        background-color: #f1f5f9;
-        color: #a6b6c8;
         border: 2px solid #a6b6c8;
 
         img {

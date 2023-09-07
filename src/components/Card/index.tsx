@@ -1,4 +1,5 @@
-import { ITodo } from '@/interfaces/todo.interface';
+import { FC } from 'react';
+import { ICardProps, ITodo } from '@/interfaces/todo.interface';
 import deleteIcon from '/icons/delete.svg';
 import editIcon from '/icons/edit.svg';
 import checkIcon from '/icons/check.svg';
@@ -7,11 +8,7 @@ import { getStatus } from '@/utils/status.util';
 import { parseDateStringFormat } from '@/utils/date.util';
 import EmptyData from '../EmptyData';
 
-type Props = {
-  data: ITodo[];
-};
-
-const Card = ({ data }: Props) => (
+const Card: FC<ICardProps> = ({ data }: ICardProps) => (
   <>
     {!data?.length && <EmptyData />}
     {data.map((item: ITodo) => (

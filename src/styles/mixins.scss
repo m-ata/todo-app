@@ -1,0 +1,8 @@
+@mixin label($font: 12px, $color: $black, $font-weight: 600, $white-space: normal) {
+    font-size: $font;
+    letter-spacing: 0.1px;
+    line-height: 20px;
+    white-space: $white-space;
+    font-weight: $font-weight;
+    color: $color
+}

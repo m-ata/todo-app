@@ -1,19 +1,26 @@
-header {
+.app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background: $vistaWhite;
 
-  h5 {
-    color: $blue;
-    font-size: 18px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    font-weight: 700;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+
+    .logo {
+      width: 50px;
+      height: 50px;
+    }
+
+    .heading {
+      @include label(20px, $blue, 700);
+      padding: 0 8px;
+    }
   }
-
-  .todo-icon {
-    width: 50px;
-    height: 50px;
+  .btn-container {
+    padding: 8px;
   }
 }
