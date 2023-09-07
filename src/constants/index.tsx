@@ -14,3 +14,9 @@ export const DEFAULT_PAGINATION_OPTIONS = {
 };
 
 export const TODO_COLUMNS = ['Task', 'Deadline', 'Status', 'Actions'];
+
+export const COMPLETE_TODO_CONFIRMATION_HEADING = 'Complete Task';
+export const COMPLETE_TODO_CONFIRMATION_CONTENT = 'Are you sure, this task is completed?';
+
+export const DELETE_TODO_CONFIRMATION_HEADING = 'Delete Task';
+export const DELETE_TODO_CONFIRMATION_CONTENT = 'Are you sure, you want to delete this task?';

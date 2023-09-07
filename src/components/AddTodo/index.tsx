@@ -17,7 +17,7 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
       event.preventDefault();
 
       const data: ITodo = {
-        id: Math.random().toString(36).substr(2, 9),
+        id: Math.random().toString(36).substring(2, 9),
         task: taskInputRef.current?.value || '',
         deadline: parseDateToTimestamp(deadlineInputRef.current?.value || ''),
         isCompleted: false,
@@ -67,7 +67,6 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
             />
             <Button
               label="Save"
-              onClick={() => console.log('save')}
               type="submit"
             />
           </div>
