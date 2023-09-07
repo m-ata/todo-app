@@ -7,8 +7,13 @@ import './styles.scss';
 import { parseDateStringFormat } from '@/utils/date.util';
 import { getStatus } from '@/utils/status.util';
 import EmptyData from '@components/EmptyData';
+import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 
-const Table: FC<ITableProps> = ({ columns, data }: ITableProps) => {
+const Table: FC<ITableProps> = ({
+  columns,
+  data,
+  handleUpsert,
+}: ITableProps) => {
   return (
     <>
       <table className="table">
@@ -32,13 +37,22 @@ const Table: FC<ITableProps> = ({ columns, data }: ITableProps) => {
                 </span>
               </td>
               <td>
-                <button type="button" className={`icon-btn delete`}>
+                <button
+                  type="button"
+                  className={`icon-btn delete`}
+                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.DELETE)}
+                >
                   <img src={deleteIcon} alt={'delete-icon'} />
                 </button>
-                <button type="button" className={`icon-btn edit`}>
+                <button disabled={item.isCompleted} type="button" className={`icon-btn edit`}>
                   <img src={editIcon} alt={'edit-icon'} />
                 </button>
-                <button type="button" className={`icon-btn check`}>
+                <button
+                  type="button"
+                  disabled={item.isCompleted}
+                  className={`icon-btn check`}
+                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.COMPLETE)}
+                >
                   <img src={checkIcon} alt={'check-icon'} />
                 </button>
               </td>
