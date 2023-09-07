@@ -1,15 +1,23 @@
 import { useSelector } from 'react-redux';
-import { RootState } from '@redux/reducers/rootReducer';
 import { useEffect, useState } from 'react';
+
+import { RootState } from '@redux/reducers/rootReducer';
 import Pagination from '../Pagination';
-import './styles.scss';
 import Table from '@components/Table';
 import Card from '@components/Card';
 import { TODO_COLUMNS } from '@/constants';
+import { ITodo } from '@/interfaces/todo.interface';
+
+import './styles.scss';
 
 const TodoList = () => {
   const { todos } = useSelector((state: RootState) => state.todos);
+  const { paginationOptions } = useSelector(
+    (state: RootState) => state.paginationOptions,
+  );
+  const { offset, limit } = paginationOptions;
   const [isMobile, setIsMobile] = useState(false);
+  const [filteredTodoList, setFilteredTodoList] = useState<ITodo[]>([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,16 +32,20 @@ const TodoList = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setFilteredTodoList(todos.slice(offset, offset + limit));
+  }, [offset, limit, todos]);
+
   return (
     <div className="todos-container">
       <div className="list-container">
         {isMobile ? (
-          <Card data={todos} />
+          <Card data={filteredTodoList} />
         ) : (
-          <Table data={todos} columns={TODO_COLUMNS} />
+          <Table data={filteredTodoList} columns={TODO_COLUMNS} />
         )}
       </div>
-      <Pagination />
+      <Pagination todos={todos} />
     </div>
   );
 };
