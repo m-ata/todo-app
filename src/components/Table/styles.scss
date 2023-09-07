@@ -8,16 +8,12 @@
     padding: 8px 12px;
     border-top: 1px solid $skyBlue;
     border-bottom: 1px solid $skyBlue;
-    font-size: 18px;
+    @include label(16px);
   }
 
   th,
   td {
     color: $black;
-    font-weight: 600;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    white-space: nowrap;
     padding: 10px 12px;
     text-align: left;
   }
@@ -28,21 +24,18 @@
       border-bottom: 1px solid $darkGray;
 
       &:hover {
-        background-color: $silver;
+        background-color: $vistaWhite;
       }
 
       :first-child {
-        width: 50%;
-      }
-
-      :last-child {
-        width: 20%;
+        width: 40%;
       }
 
       td {
-        font-size: 14px;
+        @include label(14px, $black, 500);
         overflow-x: hidden;
         text-overflow: ellipsis;
+        width: 20%;
 
         .icon-btn {
           display: inline-flex;
@@ -70,7 +63,7 @@
           }
 
           &.check {
-            border: 2px solid $darkGray;
+            border: 2px solid $green;
           }
         }
 

@@ -13,3 +13,7 @@ export interface ITableProps {
   columns: string[];
   data: ITodo[];
 }
+
+export interface ICardProps {
+  data: ITodo[];
+}

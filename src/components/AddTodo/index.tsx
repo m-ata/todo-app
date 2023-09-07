@@ -32,8 +32,8 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
     <>
       <section className="modal">
         <div className="header">
-          <h2> Add Todo </h2>
-          <button className="btn-close" onClick={() => console.log('Close')}>
+          <h2 className='heading'> Add Todo </h2>
+          <button className="btn-close" onClick={onClose}>
             ⨉
           </button>
         </div>
@@ -57,6 +57,7 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
               placeholder="Select deadline"
             />
           </div>
+          <hr />
           <div className="actions">
             <Button
               label="Cancel"

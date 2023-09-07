@@ -21,7 +21,7 @@ const TodoList = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.outerWidth <= 768);
+      setIsMobile(window.outerWidth <= 767);
     };
 
     handleResize();

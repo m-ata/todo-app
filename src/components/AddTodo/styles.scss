@@ -5,43 +5,43 @@
   padding: 16px;
   position: absolute;
   z-index: 100;
-  top: calc(50vh - 135px);
-  left: calc(50vw - 325px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: $white;
   border: 1px solid $lightGray;
   border-radius: 15px;
   min-width: calc(50vw - 50px);
+
+  @media screen and (max-width: 767px) {
+    width: calc(100vw - 100px);
+  }
 
   .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    h2 {
-      font-size: 16px;
-      font-weight: bolder;
+    .heading {
+      @include label(16px, $blue);
     }
 
     .btn-close {
-      border: 0;
       border-radius: 50%;
       width: 30px;
       height: 30px;
-      cursor: pointer;
     }
   }
 
   form {
+    margin-top: 8px;
+
     .input-group {
       display: flex;
       flex-direction: column;
 
       label {
-        color: $black;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0.1px;
-        font-weight: 600;
+        @include label(14px);
       }
 
       input {
@@ -55,6 +55,7 @@
       display: flex;
       justify-content: flex-end;
       gap: 12px;
+      margin-top: 12px;
     }
   }
 
@@ -62,8 +63,8 @@
     display: block;
     height: 1px;
     border: 0;
-    border-top: 2px solid $darkGray;
-    margin: 4px 0;
+    border-top: 2px solid $darkBlue;
+    margin: 8px 0;
   }
 }
 

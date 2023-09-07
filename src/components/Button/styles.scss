@@ -2,7 +2,7 @@
   padding: 12px;
   border-radius: 25px;
   white-space: nowrap;
-  min-width: 100px;
+  min-width: 75px;
   display: flex;
   justify-content: center;
 
@@ -14,27 +14,24 @@
     }
 
     span {
-      color: $white;
+      @include label(14px, $white);
     }
   }
 
   &.secondary {
     background-color: $lightGray;
+
+    &:hover {
+      background-color: $darkGray;
+    }
+
     span {
-      color: $black;
+      @include label(14px);
     }
   }
 
   img {
     width: 20px;
     height: 20px;
-    margin-right: 4px;
-  }
-
-  span {
-    font-size: 14px;
-    line-height: 20px;
-    letter-spacing: 0.1px;
-    font-weight: 600;
   }
 }
