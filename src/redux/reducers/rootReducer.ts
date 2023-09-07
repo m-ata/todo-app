@@ -1,5 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import todosReducer from './../slices/todo.slice';
+import paginationReducer from './../slices/pagination.slice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -10,6 +11,7 @@ const persistTodos = {
 
 const rootReducer = combineReducers({
   todos: persistReducer(persistTodos, todosReducer),
+  paginationOptions: paginationReducer,
 });
 
 export default rootReducer;
