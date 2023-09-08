@@ -42,6 +42,10 @@
 
       label {
         @include label(14px);
+
+        span {
+          @include label(12px, $red);
+        }
       }
 
       input {
@@ -49,8 +53,22 @@
         border-radius: 4px;
         padding: 8px;
         margin: 8px 0;
+        outline: none
+      }
+
+      p {
+        @include label(12px, $red);
+        margin: 0;
       }
     }
+
+    .error {
+      input,
+      input:focus {
+        border-color: $red;
+      }
+    }
+
     .actions {
       display: flex;
       justify-content: flex-end;
@@ -59,11 +77,11 @@
     }
   }
 
-  hr {
+  .horizontal-line {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 2px solid $darkBlue;
+    border-top: 2px solid $darkGray;
     margin: 8px 0;
   }
 }

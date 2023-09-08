@@ -44,7 +44,12 @@ const Table: FC<ITableProps> = ({
                 >
                   <img src={deleteIcon} alt={'delete-icon'} />
                 </button>
-                <button disabled={item.isCompleted} type="button" className={`icon-btn edit`}>
+                <button
+                  disabled={item.isCompleted}
+                  type="button"
+                  className={`icon-btn edit`}
+                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.EDIT)}
+                >
                   <img src={editIcon} alt={'edit-icon'} />
                 </button>
                 <button

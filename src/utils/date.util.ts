@@ -5,6 +5,7 @@
  */
 export const parseDateToTimestamp = (date: string): number => {
   const parsedDate = new Date(date);
+  parsedDate.setHours(23, 59, 59, 999); // setting day end time
   return !isNaN(parsedDate.getTime()) ? parsedDate.getTime() : Date.now();
 };
 

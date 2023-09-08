@@ -28,6 +28,7 @@ const Card: FC<ICardProps> = ({ data, handleUpsert }: ICardProps) => (
               type="button"
               disabled={item.isCompleted}
               className="icon-btn edit"
+              onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.EDIT)}
             >
               <img src={editIcon} alt="edit-icon" />
             </button>
