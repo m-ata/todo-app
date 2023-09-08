@@ -13,6 +13,13 @@ export const DEFAULT_PAGINATION_OPTIONS = {
   size: 0,
 };
 
+export const DEFAULT_TODO = {
+  id: '',
+  task: '',
+  deadline: 0,
+  isCompleted: false
+};
+
 export const TODO_COLUMNS = ['Task', 'Deadline', 'Status', 'Actions'];
 
 export const COMPLETE_TODO_CONFIRMATION_HEADING = 'Complete Task';

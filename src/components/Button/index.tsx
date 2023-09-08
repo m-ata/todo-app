@@ -10,7 +10,7 @@ const Button: FC<IButtonProps> = (props: IButtonProps) => {
     icon,
     isLoading = false,
     category = 'primary',
-    type,
+    type = 'button',
   } = props;
   return (
     <button

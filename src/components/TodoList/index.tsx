@@ -11,6 +11,7 @@ import {
   DELETE_TODO_CONFIRMATION_CONTENT,
   DELETE_TODO_CONFIRMATION_HEADING,
   TODO_COLUMNS,
+  DEFAULT_TODO,
 } from '@/constants';
 import { ITodo } from '@/interfaces/todo.interface';
 
@@ -18,6 +19,7 @@ import './styles.scss';
 import ConfirmationModal from '../ConfirmationModal';
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 import { updateTodo, deleteTodo } from '@/redux/slices/todo.slice';
+import EditTodo from '@components/EditTodo';
 
 const TodoList = () => {
   // local states
@@ -27,7 +29,8 @@ const TodoList = () => {
     useState<boolean>(false);
   const [showDeleteTodoModal, setShowDeleteTodoModal] =
     useState<boolean>(false);
-  const [selectedTodo, setSelectedTodo] = useState<ITodo | null>(null);
+  const [showEditTodoModal, setShowEditTodoModal] = useState<boolean>(false);
+  const [selectedTodo, setSelectedTodo] = useState<ITodo>(DEFAULT_TODO);
 
   // redux states
   const { todos } = useSelector((state: RootState) => state.todos);
@@ -55,7 +58,7 @@ const TodoList = () => {
     setFilteredTodoList(todos.slice(offset, offset + limit));
   }, [offset, limit, todos]);
 
-  // opens delete, complete confirmation modal for now
+  // opens delete, complete and edit todo modal
   const handleOpenUpsertModal = (todo: ITodo, upsertType: string) => {
     setSelectedTodo(todo);
     switch (upsertType) {
@@ -66,7 +69,7 @@ const TodoList = () => {
         setShowDeleteTodoModal(true);
         break;
       case UPSERT_TODO_TYPE.EDIT:
-        // will implement later
+        setShowEditTodoModal(true);
         break;
       default:
         break;
@@ -75,11 +78,11 @@ const TodoList = () => {
 
   // update todo into store
   const handleUpdateTodo = () => {
-    if (selectedTodo) {
-      dispatch(updateTodo({ ...selectedTodo, isCompleted: true}));
+    if (showCompleteTodoModal) {
+      dispatch(updateTodo({ ...selectedTodo, isCompleted: true }));
       setShowCompleteTodoModal(false);
-    }
-    setSelectedTodo(null);
+    } else setShowEditTodoModal(false);
+    setSelectedTodo(DEFAULT_TODO);
   };
 
   // delete todo from store
@@ -88,7 +91,7 @@ const TodoList = () => {
       dispatch(deleteTodo(selectedTodo?.id));
       setShowDeleteTodoModal(!showDeleteTodoModal);
     }
-    setSelectedTodo(null);
+    setSelectedTodo(DEFAULT_TODO);
   };
 
   return (
@@ -120,6 +123,9 @@ const TodoList = () => {
           onClose={() => setShowDeleteTodoModal(!showDeleteTodoModal)}
           onApply={handleDeleteTodo}
         />
+      )}
+      {showEditTodoModal && (
+        <EditTodo todo={selectedTodo} onClose={handleUpdateTodo} />
       )}
     </div>
   );
