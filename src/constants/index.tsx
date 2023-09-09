@@ -27,5 +27,3 @@ export const COMPLETE_TODO_CONFIRMATION_CONTENT = 'Are you sure, this task is co
 
 export const DELETE_TODO_CONFIRMATION_HEADING = 'Delete Task';
 export const DELETE_TODO_CONFIRMATION_CONTENT = 'Are you sure, you want to delete this task?';
-
-export const API_URL = "http://localhost:5147/api";
