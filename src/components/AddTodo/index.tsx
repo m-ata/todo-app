@@ -11,6 +11,9 @@ import { IFormInputs } from '@/interfaces/modal.interface';
 import { SubmitHandler } from 'react-hook-form';
 import { parseDateToTimestamp } from '@utils/date.util';
 import { useAddTodoMutation } from '@/redux/services/todo.service';
+import { toast } from 'react-toastify';
+import { getApiError } from '@/utils/apiError.utils';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
 
 const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
   const dispatch = useDispatch();
@@ -38,11 +41,12 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
       )) as RTKQueryResponse; // call api using RTK addTodoMutation
       if (data) {
         dispatch(addTodo(data as ITodo)); // dispatch the response
+        toast.success(SUCCESS_MESSAGES.SAVED);
         onClose();
       }
-      if (error) throw new Error();
+      if (error) toast.error(getApiError(error.status as number));
     } catch (err) {
-      // will handle error later
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
   };
 

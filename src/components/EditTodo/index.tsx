@@ -11,6 +11,9 @@ import { IFormInputs } from '@/interfaces/modal.interface';
 import { SubmitHandler } from 'react-hook-form';
 import { parseDateToTimestamp } from '@utils/date.util';
 import { useUpdateTodoMutation } from '@/redux/services/todo.service';
+import { toast } from 'react-toastify';
+import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
+import { getApiError } from '@/utils/apiError.utils';
 
 const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
   const dispatch = useDispatch();
@@ -34,12 +37,13 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
         updatedTodo,
       )) as RTKQueryResponse;
       if (data) {
-        dispatch(updateTodo(data as ITodo));
+        dispatch(updateTodo(data as ITodo)); // update todo in store
+        toast.success(SUCCESS_MESSAGES.UPDATED);
         onClose();
       }
-      if (error) throw new Error();
+      if (error) toast.error(getApiError(error.status as number));
     } catch (err) {
-      // handle error later
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
   };
 

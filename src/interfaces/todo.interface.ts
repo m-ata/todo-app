@@ -1,4 +1,3 @@
-import { SerializedError } from "@reduxjs/toolkit";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 
 export interface ITodo {
@@ -33,6 +32,6 @@ export interface IDeleteResponse {
 
 export interface RTKQueryResponse {
   data: ITodo | ITodo[] | IDeleteResponse;
-  error: FetchBaseQueryError | SerializedError;
+  error: FetchBaseQueryError;
   isLoading: boolean;
 }
