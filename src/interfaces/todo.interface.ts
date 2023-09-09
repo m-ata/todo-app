@@ -1,5 +1,8 @@
+import { SerializedError } from "@reduxjs/toolkit";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+
 export interface ITodo {
-  id: string;
+  id?: number;
   task: string;
   deadline: number;
   isCompleted: boolean;
@@ -21,4 +24,15 @@ export interface ICardProps {
 
 export interface ITableProps extends ICardProps {
   columns: string[];
+}
+
+export interface IDeleteResponse {
+  success: boolean;
+  id: number;
+}
+
+export interface RTKQueryResponse {
+  data: ITodo | ITodo[] | IDeleteResponse;
+  error: FetchBaseQueryError | SerializedError;
+  isLoading: boolean;
 }

@@ -27,9 +27,12 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
 
   useEffect(() => {
     const todoSize = todos?.length || 0;
-    handlePagination({ ...paginationOptions, size: todoSize,
-      totalPages: Math.ceil(todoSize / limit), });
-  }, [todos, limit,]);
+    handlePagination({
+      ...paginationOptions,
+      size: todoSize,
+      totalPages: Math.ceil(todoSize / limit),
+    });
+  }, [todos, limit]);
 
   return (
     <div className="pagination">
@@ -59,7 +62,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
       <div className="item-count">
         <span>
           {' '}
-          {currentPage} / {Math.ceil(totalPages)}{' '}
+          {currentPage} / {Math.ceil(totalPages) || 1}{' '}
         </span>
       </div>
 

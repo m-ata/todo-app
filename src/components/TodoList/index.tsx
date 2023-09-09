@@ -13,13 +13,14 @@ import {
   TODO_COLUMNS,
   DEFAULT_TODO,
 } from '@/constants';
-import { ITodo } from '@/interfaces/todo.interface';
+import { IDeleteResponse, ITodo, RTKQueryResponse } from '@interfaces/todo.interface';
 
 import './styles.scss';
 import ConfirmationModal from '../ConfirmationModal';
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 import { updateTodo, deleteTodo } from '@/redux/slices/todo.slice';
 import EditTodo from '@components/EditTodo';
+import { useDeleteTodoMutation, useUpdateTodoMutation } from '@/redux/services/todo.service';
 
 const TodoList = () => {
   // local states
@@ -40,7 +41,12 @@ const TodoList = () => {
   const { offset, limit } = paginationOptions;
 
   const dispatch = useDispatch();
+  
+  // mutations
+  const [updateTodoMutation] = useUpdateTodoMutation();
+  const [ deleteTodoMutation ] = useDeleteTodoMutation();
 
+  // handle responsiveness
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.outerWidth <= 767);
@@ -55,6 +61,7 @@ const TodoList = () => {
   }, []);
 
   useEffect(() => {
+    if (todos)
     setFilteredTodoList(todos.slice(offset, offset + limit));
   }, [offset, limit, todos]);
 
@@ -77,21 +84,44 @@ const TodoList = () => {
   };
 
   // update todo into store
-  const handleUpdateTodo = () => {
-    if (showCompleteTodoModal) {
-      dispatch(updateTodo({ ...selectedTodo, isCompleted: true }));
-      setShowCompleteTodoModal(false);
-    } else setShowEditTodoModal(false);
-    setSelectedTodo(DEFAULT_TODO);
+  const handleUpdateTodo = async () => {
+    try {
+      if (showCompleteTodoModal) {
+        const updatedTodo = {
+          ...selectedTodo,
+          isCompleted: true
+        };
+        const { data, error } = (await updateTodoMutation(
+          updatedTodo,
+        )) as RTKQueryResponse;
+        if (data) {
+          dispatch(updateTodo(data as ITodo));
+          setShowCompleteTodoModal(false);
+        }
+        if (error) throw new Error();
+      } else setShowEditTodoModal(false);
+      setSelectedTodo(DEFAULT_TODO);
+    } catch (error) {
+      //handle error
+    }
   };
 
   // delete todo from store
-  const handleDeleteTodo = () => {
-    if (selectedTodo) {
-      dispatch(deleteTodo(selectedTodo?.id));
-      setShowDeleteTodoModal(!showDeleteTodoModal);
+  const handleDeleteTodo = async () => {
+    try {
+      if (selectedTodo?.id) {
+        const { data, error } = await deleteTodoMutation(selectedTodo.id) as RTKQueryResponse;
+        const response = data as IDeleteResponse;
+        if (response.success) {
+          dispatch(deleteTodo(response.id));
+          setShowDeleteTodoModal(!showDeleteTodoModal);
+        }
+        if (error) throw new Error();
+      }
+      setSelectedTodo(DEFAULT_TODO);
+    } catch(err) {
+      // handle error later
     }
-    setSelectedTodo(DEFAULT_TODO);
   };
 
   return (
