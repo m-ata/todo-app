@@ -1,6 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from "path";
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
+
+const port = parseInt(process.env.VITE_PORT || '') || 3000;
 
 export default defineConfig({
   plugins: [react()],
@@ -24,5 +29,8 @@ export default defineConfig({
         `,
       }
     }
+  },
+  server: {
+    port,
   }
 });

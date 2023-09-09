@@ -12,14 +12,26 @@ import {
   DELETE_TODO_CONFIRMATION_HEADING,
   TODO_COLUMNS,
   DEFAULT_TODO,
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
 } from '@/constants';
-import { ITodo } from '@/interfaces/todo.interface';
+import {
+  IDeleteResponse,
+  ITodo,
+  RTKQueryResponse,
+} from '@interfaces/todo.interface';
 
 import './styles.scss';
 import ConfirmationModal from '../ConfirmationModal';
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 import { updateTodo, deleteTodo } from '@/redux/slices/todo.slice';
 import EditTodo from '@components/EditTodo';
+import {
+  useDeleteTodoMutation,
+  useUpdateTodoMutation,
+} from '@/redux/services/todo.service';
+import { toast } from 'react-toastify';
+import { getApiError } from '@/utils/apiError.utils';
 
 const TodoList = () => {
   // local states
@@ -41,6 +53,11 @@ const TodoList = () => {
 
   const dispatch = useDispatch();
 
+  // mutations
+  const [updateTodoMutation] = useUpdateTodoMutation();
+  const [deleteTodoMutation] = useDeleteTodoMutation();
+
+  // handle responsiveness
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.outerWidth <= 767);
@@ -55,7 +72,7 @@ const TodoList = () => {
   }, []);
 
   useEffect(() => {
-    setFilteredTodoList(todos.slice(offset, offset + limit));
+    if (todos) setFilteredTodoList(todos.slice(offset, offset + limit));
   }, [offset, limit, todos]);
 
   // opens delete, complete and edit todo modal
@@ -76,22 +93,49 @@ const TodoList = () => {
     }
   };
 
-  // update todo into store
-  const handleUpdateTodo = () => {
-    if (showCompleteTodoModal) {
-      dispatch(updateTodo({ ...selectedTodo, isCompleted: true }));
-      setShowCompleteTodoModal(false);
-    } else setShowEditTodoModal(false);
-    setSelectedTodo(DEFAULT_TODO);
+  // update todo into store for complete todo and opens edit modal based on the condition
+  const handleUpdateTodo = async () => {
+    try {
+      if (showCompleteTodoModal) {
+        const updatedTodo = {
+          ...selectedTodo,
+          isCompleted: true,
+        };
+        const { data, error } = (await updateTodoMutation(
+          updatedTodo,
+        )) as RTKQueryResponse;
+        if (data) {
+          dispatch(updateTodo(data as ITodo)); // update completed todo in store
+          toast.success(SUCCESS_MESSAGES.COMPLETED);
+          setShowCompleteTodoModal(false);
+        }
+        if (error) toast.error(getApiError(error.status as number));
+      } else setShowEditTodoModal(false);
+      setSelectedTodo(DEFAULT_TODO);
+    } catch (error) {
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
+    }
   };
 
   // delete todo from store
-  const handleDeleteTodo = () => {
-    if (selectedTodo) {
-      dispatch(deleteTodo(selectedTodo?.id));
-      setShowDeleteTodoModal(!showDeleteTodoModal);
+  const handleDeleteTodo = async () => {
+    try {
+      if (selectedTodo?.id) {
+        const { data, error } = (await deleteTodoMutation(
+          selectedTodo.id,
+        )) as RTKQueryResponse;
+        const response = data as IDeleteResponse;
+        if (response.success) {
+          dispatch(deleteTodo(response.id)); // delete todo from store
+          toast.success(SUCCESS_MESSAGES.DELETED);
+          setShowDeleteTodoModal(!showDeleteTodoModal);
+        }
+        if (error) toast.error(getApiError(error.status as number));
+      }
+      setSelectedTodo(DEFAULT_TODO);
+    } catch (err) {
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
-    setSelectedTodo(DEFAULT_TODO);
   };
 
   return (
