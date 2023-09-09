@@ -10,7 +10,7 @@
     font-family: fantasy;
     margin: 4px;
     @media screen and (max-width: 767px) {
-        @include label(75px, $blue, 700);
+      @include label(75px, $blue, 700);
     }
   }
 
