@@ -1,0 +1,38 @@
+.page-container-nf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  .heading {
+    @include label(100px, $blue, 700);
+    font-family: fantasy;
+    margin: 4px;
+    @media screen and (max-width: 767px) {
+      @include label(75px, $blue, 700);
+    }
+  }
+
+  .title {
+    @include label(20px, $blue, 700);
+    font-family: cursive;
+    margin: 0;
+  }
+
+  .description {
+    @include label(16px, $blue);
+    margin: 16px;
+    font-family: cursive;
+    text-align: center;
+  }
+
+  .horizontal-line {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid $blue;
+    margin: 16px 0;
+    width: 225px;
+  }
+}
