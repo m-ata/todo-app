@@ -105,7 +105,7 @@ const TodoList = () => {
           toast.success(SUCCESS_MESSAGES.COMPLETED);
           setShowCompleteTodoModal(false);
         }
-        if (error) toast.error(getApiError(error.status as number));
+        if (error) toast.error(getApiError(error));
       } else setShowEditTodoModal(false);
       setSelectedTodo(DEFAULT_TODO);
     } catch (error) {
@@ -126,7 +126,7 @@ const TodoList = () => {
           toast.success(SUCCESS_MESSAGES.DELETED);
           setShowDeleteTodoModal(!showDeleteTodoModal);
         }
-        if (error) toast.error(getApiError(error.status as number));
+        if (error) toast.error(getApiError(error));
       }
       setSelectedTodo(DEFAULT_TODO);
     } catch (err) {

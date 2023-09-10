@@ -6,14 +6,18 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setTodo } from '@redux/slices/todo.slice';
 import { ITodo, RTKQueryResponse } from '@/interfaces/todo.interface';
+import { toast } from 'react-toastify';
+import { getApiError } from '@/utils/apiError.utils';
 
 const Todo = () => {
-  const { data } = useGetTodosQuery() as RTKQueryResponse;
+  const { data, error } = useGetTodosQuery() as RTKQueryResponse;
   const dispatch = useDispatch();
-
-  // setting todo in store on componentDidMount
+  console.log(data, error);
+  // setting todo in store on componentDidUpdate
   useEffect(() => {
+    if (data)
     dispatch(setTodo(data as ITodo[]));
+    if (error) toast.error(getApiError(error));
   }, [data]);
 
   return (

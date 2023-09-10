@@ -51,7 +51,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
         toast.success(SUCCESS_MESSAGES.UPDATED);
         onClose();
       }
-      if (error) toast.error(getApiError(error.status as number));
+      if (error) toast.error(getApiError(error));
     } catch (err) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
