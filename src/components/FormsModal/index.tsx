@@ -1,9 +1,14 @@
+// imports from react
 import { FC } from 'react';
-import './styles.scss';
-import Button from '../Button';
 import { useForm, SubmitHandler } from 'react-hook-form';
+// import component
+import Button from '@components/Button';
+// import interfaces
 import { IFormInputs, IFormsModalProps } from '@interfaces/modal.interface';
+//import style
+import './styles.scss';
 
+// Forms Modal to handle Todo forms, it's submission and validation
 const FormsModal: FC<IFormsModalProps> = ({
   onClose,
   onSubmit,

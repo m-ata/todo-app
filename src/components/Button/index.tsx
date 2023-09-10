@@ -1,6 +1,9 @@
 import { FC } from 'react';
+// import interface
 import { IButtonProps } from '@/interfaces/button.interface';
+// import icons
 import Spinner from '/gifs/spinner.svg';
+// import style
 import './styles.scss';
 
 const Button: FC<IButtonProps> = (props: IButtonProps) => {

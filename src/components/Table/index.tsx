@@ -1,7 +1,7 @@
 import { FC } from 'react';
-
+// import interfaces
 import { ITodo, ITableProps } from '@interfaces/todo.interface';
-
+// import components
 import EmptyData from '@components/EmptyData';
 import TodoItem from '@components/TodoItem';
 

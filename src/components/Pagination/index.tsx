@@ -1,16 +1,22 @@
+// imports from react
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/reducers/rootReducer';
-import {
-  IPaginationOption,
-  IPaginationProps,
-} from '@interfaces/pagination.interface';
-import { setPaginationOptions } from '@/redux/slices/pagination.slice';
+// import icons
 import chevronLeft from '/icons/chevron-left.svg';
 import chevronDoubleLeft from '/icons/chevron-double-left.svg';
 import chevronRight from '/icons/chevron-right.svg';
 import chevronDoubleRight from '/icons/chevron-double-right.svg';
-
+// import interfaces
+import {
+  IPaginationOption,
+  IPaginationProps,
+} from '@interfaces/pagination.interface';
+// redux related imports
+import { RootState } from '@/redux/reducers/rootReducer';
+import { setPaginationOptions } from '@/redux/slices/pagination.slice';
+// import contants
+import { ITEMS_PER_PAGE } from '@/constants/label.constants';
+// import style
 import './styles.scss';
 
 const Pagination: FC<IPaginationProps> = ({
@@ -52,7 +58,7 @@ const Pagination: FC<IPaginationProps> = ({
   return (
     <div className="pagination">
       <div className="page-items">
-        <span>Items per page</span>
+        <span> {ITEMS_PER_PAGE} </span>
         <select
           value={limit}
           onChange={(e) =>

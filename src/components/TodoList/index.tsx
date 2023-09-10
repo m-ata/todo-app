@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 // import required components
 import Pagination from '@components/Pagination';
 import Table from '@components/Table';
@@ -30,13 +31,11 @@ import {
   ITodo,
   RTKQueryResponse,
 } from '@interfaces/todo.interface';
-
 // import custom hooks
 import { getApiError } from '@utils/apiError.utils';
 import { useMobile } from '@hooks/useMobile';
-
+// import enum
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
-import { toast } from 'react-toastify';
 // import style
 import './styles.scss';
 
