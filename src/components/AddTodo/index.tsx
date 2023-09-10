@@ -13,7 +13,7 @@ import { IFormInputs } from '@interfaces/modal.interface';
 import FormsModal from '@components/FormsModal';
 // import utils
 import { parseDateToTimestamp } from '@utils/date.util';
-import { getApiError } from '@/utils/apiError.utils';
+import { getApiError } from '@/utils/apiError.util';
 // redux related imports
 import { useAddTodoMutation } from '@redux/services/todo.service';
 import { addTodo } from '@redux/slices/todo.slice';

@@ -17,7 +17,7 @@ import {
 import { IFormInputs } from '@interfaces/modal.interface';
 // import required utils
 import { parseDateToTimestamp } from '@utils/date.util';
-import { getApiError } from '@utils/apiError.utils';
+import { getApiError } from '@/utils/apiError.util';
 // import constants
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
 import { EDIT_TODO } from '@/constants/label.constants';

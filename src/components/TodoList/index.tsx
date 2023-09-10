@@ -32,7 +32,7 @@ import {
   RTKQueryResponse,
 } from '@interfaces/todo.interface';
 // import custom hooks
-import { getApiError } from '@utils/apiError.utils';
+import { getApiError } from '@/utils/apiError.util';
 import { useMobile } from '@hooks/useMobile';
 // import enum
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
