@@ -1,28 +1,38 @@
+// imports from react
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { SubmitHandler } from 'react-hook-form';
+// import component
+import FormsModal from '@components/FormsModal';
+// redux related imports
+import { updateTodo } from '@redux/slices/todo.slice';
+import { useUpdateTodoMutation } from '@redux/services/todo.service';
+// import required interfaces
 import {
   IEditTodoProps,
   ITodo,
   RTKQueryResponse,
 } from '@interfaces/todo.interface';
-import { useDispatch } from 'react-redux';
-import { updateTodo } from '@redux/slices/todo.slice';
-import FormsModal from '@components/FormsModal';
-import { IFormInputs } from '@/interfaces/modal.interface';
-import { SubmitHandler } from 'react-hook-form';
+import { IFormInputs } from '@interfaces/modal.interface';
+// import required utils
 import { parseDateToTimestamp } from '@utils/date.util';
-import { useUpdateTodoMutation } from '@/redux/services/todo.service';
-import { toast } from 'react-toastify';
+import { getApiError } from '@utils/apiError.utils';
+// import constants
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
-import { getApiError } from '@/utils/apiError.utils';
+import { EDIT_TODO } from '@/constants/label.constants';
 
 const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
   const dispatch = useDispatch();
   const [updateTodoMutation] = useUpdateTodoMutation();
+
+  // default values for edit todo form
   const defaultFormValues: IFormInputs = {
     task: todo.task,
     deadline: new Date(+todo.deadline).toISOString().split('T')[0],
   };
 
+  // submit handler for edit todo form
   const submitHandler: SubmitHandler<IFormInputs> = async (
     formData: IFormInputs,
   ) => {
@@ -49,7 +59,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
 
   return (
     <FormsModal
-      heading="Edit Todo"
+      heading={EDIT_TODO}
       formValues={defaultFormValues}
       onClose={onClose}
       onSubmit={submitHandler}

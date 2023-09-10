@@ -1,0 +1,130 @@
+// desktop view css for table row
+tr {
+  background-color: $white;
+  border-bottom: 1px solid $darkGray;
+
+  &:hover {
+    background-color: $vistaWhite;
+  }
+
+  :first-child {
+    width: 40%;
+  }
+
+  td {
+    @include label(14px, $black, 500);
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 20%;
+
+    .icon-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px;
+      border-radius: 6px;
+      margin-left: 8px;
+      background: $white;
+      width: 30px;
+      height: 30px;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      &.delete {
+        border: 2px solid $red;
+        margin-left: 0;
+      }
+
+      &.edit {
+        border: 2px solid $blue;
+      }
+
+      &.check {
+        border: 2px solid $green;
+      }
+    }
+
+    .status {
+      padding: 2px 8px;
+      border-radius: 15px;
+      text-transform: capitalize;
+      border: 2px solid;
+      border-color: #459cea;
+      color: #459cea;
+
+      &.overdue {
+        color: $red;
+        border-color: $red;
+      }
+
+      &.completed {
+        color: $green;
+        border-color: $green;
+      }
+    }
+  }
+}
+
+// mobile view css for card
+.card {
+  width: calc(100vw - 20px);
+
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    align-items: center;
+    background-color: $lightBlue;
+    width: 100%;
+
+    .status {
+      padding: 2px 8px;
+      border-radius: 15px;
+      text-transform: capitalize;
+      border: 2px solid;
+      border-color: #459cea;
+      color: #459cea;
+
+      &.overdue {
+        color: $red;
+        border-color: $red;
+      }
+
+      &.completed {
+        color: $green;
+        border-color: $green;
+      }
+    }
+
+    .actions {
+      button {
+        background: $lightBlue;
+      }
+    }
+  }
+
+  .card-data {
+    background-color: $white;
+    padding: 8px 12px;
+    width: 100%;
+
+    .group {
+      h5 {
+        margin: 0;
+        font-size: 14px;
+      }
+      span {
+        font-size: 12px;
+      }
+      hr {
+        border: 1px solid $darkGray;
+      }
+    }
+  }
+}

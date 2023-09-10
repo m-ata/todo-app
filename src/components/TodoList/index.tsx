@@ -1,10 +1,20 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-
-import { RootState } from '@redux/reducers/rootReducer';
-import Pagination from '../Pagination';
+import { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
+// import required components
+import Pagination from '@components/Pagination';
 import Table from '@components/Table';
-import Card from '@components/Card';
+import Cards from '@components/Cards';
+import ConfirmationModal from '@components/ConfirmationModal';
+import EditTodo from '@components/EditTodo';
+// redux related imports
+import { RootState } from '@redux/reducers/rootReducer';
+import { updateTodo, deleteTodo } from '@redux/slices/todo.slice';
+import {
+  useDeleteTodoMutation,
+  useUpdateTodoMutation,
+} from '@redux/services/todo.service';
+//import constants
 import {
   COMPLETE_TODO_CONFIRMATION_CONTENT,
   COMPLETE_TODO_CONFIRMATION_HEADING,
@@ -15,28 +25,23 @@ import {
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
 } from '@/constants';
+// import interfaces
 import {
   IDeleteResponse,
   ITodo,
   RTKQueryResponse,
 } from '@interfaces/todo.interface';
-
-import './styles.scss';
-import ConfirmationModal from '../ConfirmationModal';
+// import custom hooks
+import { getApiError } from '@utils/apiError.utils';
+import { useMobile } from '@hooks/useMobile';
+// import enum
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
-import { updateTodo, deleteTodo } from '@/redux/slices/todo.slice';
-import EditTodo from '@components/EditTodo';
-import {
-  useDeleteTodoMutation,
-  useUpdateTodoMutation,
-} from '@/redux/services/todo.service';
-import { toast } from 'react-toastify';
-import { getApiError } from '@/utils/apiError.utils';
+// import style
+import './styles.scss';
 
 const TodoList = () => {
   // local states
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [filteredTodoList, setFilteredTodoList] = useState<ITodo[]>([]);
+  const isMobile = useMobile();
   const [showCompleteTodoModal, setShowCompleteTodoModal] =
     useState<boolean>(false);
   const [showDeleteTodoModal, setShowDeleteTodoModal] =
@@ -57,44 +62,35 @@ const TodoList = () => {
   const [updateTodoMutation] = useUpdateTodoMutation();
   const [deleteTodoMutation] = useDeleteTodoMutation();
 
-  // handle responsiveness
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.outerWidth <= 767);
-    };
+  // memoized filtered todo list
+  const filteredTodoList = useMemo(
+    () => todos?.slice(offset, offset + limit) ?? [],
+    [offset, limit, todos],
+  );
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
+  // Memoized handleOpenUpsertModal to opens delete, complete and edit todo modal
+  const handleOpenUpsertModal = useCallback(
+    (todo: ITodo, upsertType: string) => {
+      setSelectedTodo(todo);
+      switch (upsertType) {
+        case UPSERT_TODO_TYPE.COMPLETE:
+          setShowCompleteTodoModal(true);
+          break;
+        case UPSERT_TODO_TYPE.DELETE:
+          setShowDeleteTodoModal(true);
+          break;
+        case UPSERT_TODO_TYPE.EDIT:
+          setShowEditTodoModal(true);
+          break;
+        default:
+          break;
+      }
+    },
+    [],
+  );
 
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (todos) setFilteredTodoList(todos.slice(offset, offset + limit));
-  }, [offset, limit, todos]);
-
-  // opens delete, complete and edit todo modal
-  const handleOpenUpsertModal = (todo: ITodo, upsertType: string) => {
-    setSelectedTodo(todo);
-    switch (upsertType) {
-      case UPSERT_TODO_TYPE.COMPLETE:
-        setShowCompleteTodoModal(true);
-        break;
-      case UPSERT_TODO_TYPE.DELETE:
-        setShowDeleteTodoModal(true);
-        break;
-      case UPSERT_TODO_TYPE.EDIT:
-        setShowEditTodoModal(true);
-        break;
-      default:
-        break;
-    }
-  };
-
-  // update todo into store for complete todo and opens edit modal based on the condition
-  const handleUpdateTodo = async () => {
+  // Memoized handleUpdateTodo component to update todo
+  const handleUpdateTodo = useCallback(async () => {
     try {
       if (showCompleteTodoModal) {
         const updatedTodo = {
@@ -103,7 +99,7 @@ const TodoList = () => {
         };
         const { data, error } = (await updateTodoMutation(
           updatedTodo,
-        )) as RTKQueryResponse;
+        )) as RTKQueryResponse; // call api using RTK updateTodoMutation
         if (data) {
           dispatch(updateTodo(data as ITodo)); // update completed todo in store
           toast.success(SUCCESS_MESSAGES.COMPLETED);
@@ -115,15 +111,15 @@ const TodoList = () => {
     } catch (error) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
-  };
+  }, [selectedTodo, showCompleteTodoModal, showEditTodoModal]);
 
-  // delete todo from store
-  const handleDeleteTodo = async () => {
+  // Memoized handleDeleteTodo function to delete todo from store
+  const handleDeleteTodo = useCallback(async () => {
     try {
       if (selectedTodo?.id) {
         const { data, error } = (await deleteTodoMutation(
           selectedTodo.id,
-        )) as RTKQueryResponse;
+        )) as RTKQueryResponse; // call api using RTK deleteTodoMutation
         const response = data as IDeleteResponse;
         if (response.success) {
           dispatch(deleteTodo(response.id)); // delete todo from store
@@ -136,22 +132,27 @@ const TodoList = () => {
     } catch (err) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
     }
-  };
+  }, [selectedTodo, showDeleteTodoModal]);
 
   return (
     <div className="todos-container">
       <div className="list-container">
         {isMobile ? (
-          <Card data={filteredTodoList} handleUpsert={handleOpenUpsertModal} />
+          <Cards
+            data={filteredTodoList}
+            handleUpsert={handleOpenUpsertModal}
+            isMobile={true}
+          />
         ) : (
           <Table
             data={filteredTodoList}
             columns={TODO_COLUMNS}
             handleUpsert={handleOpenUpsertModal}
+            isMobile={false}
           />
         )}
       </div>
-      <Pagination todos={todos} />
+      <Pagination todos={todos} currentTodosAmount={filteredTodoList.length} />
       {showCompleteTodoModal && (
         <ConfirmationModal
           heading={COMPLETE_TODO_CONFIRMATION_HEADING}

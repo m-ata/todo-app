@@ -1,7 +1,9 @@
-import { IConfirmationModalProps } from '@interfaces/modal.interface';
 import { FC } from 'react';
+// import interfaces
+import { IConfirmationModalProps } from '@interfaces/modal.interface';
+// import component
 import Button from '@components/Button';
-
+// import styles
 import './styles.scss';
 
 const ConfirmationModal: FC<IConfirmationModalProps> = ({

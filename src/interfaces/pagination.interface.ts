@@ -11,4 +11,5 @@ export interface IPaginationOption {
 
 export interface IPaginationProps {
   todos: ITodo[];
+  currentTodosAmount: number;
 }

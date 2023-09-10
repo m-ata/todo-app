@@ -1,19 +1,25 @@
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
+import { SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-toastify';
+// import interfaces
 import {
   IAddTodoProps,
   ITodo,
   RTKQueryResponse,
 } from '@interfaces/todo.interface';
-import { useDispatch } from 'react-redux';
-import { addTodo } from '@redux/slices/todo.slice';
+import { IFormInputs } from '@interfaces/modal.interface';
+// import component
 import FormsModal from '@components/FormsModal';
-import { IFormInputs } from '@/interfaces/modal.interface';
-import { SubmitHandler } from 'react-hook-form';
+// import utils
 import { parseDateToTimestamp } from '@utils/date.util';
-import { useAddTodoMutation } from '@/redux/services/todo.service';
-import { toast } from 'react-toastify';
 import { getApiError } from '@/utils/apiError.utils';
+// redux related imports
+import { useAddTodoMutation } from '@redux/services/todo.service';
+import { addTodo } from '@redux/slices/todo.slice';
+// import constants
 import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
+import { ADD_TODO } from '@/constants/label.constants';
 
 const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
   const dispatch = useDispatch();
@@ -52,7 +58,7 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
 
   return (
     <FormsModal
-      heading="Add Todo"
+      heading={ADD_TODO}
       formValues={defaultFormValues}
       onClose={onClose}
       onSubmit={submitHandler}
