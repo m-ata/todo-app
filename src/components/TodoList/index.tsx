@@ -126,7 +126,6 @@ const TodoList = () => {
           dispatch(deleteTodo(response.id)); // delete todo from store
           toast.success(SUCCESS_MESSAGES.DELETED);
           setShowDeleteTodoModal(!showDeleteTodoModal);
-          console.log(filteredTodoList);
         }
         if (error) toast.error(getApiError(error.status as number));
       }
@@ -154,7 +153,7 @@ const TodoList = () => {
           />
         )}
       </div>
-      <Pagination todos={todos} />
+      <Pagination todos={todos} currentTodosAmount={filteredTodoList.length} />
       {showCompleteTodoModal && (
         <ConfirmationModal
           heading={COMPLETE_TODO_CONFIRMATION_HEADING}

@@ -1,9 +1,4 @@
-import chevronLeft from '/icons/chevron-left.svg';
-import chevronDoubleLeft from '/icons/chevron-double-left.svg';
-import chevronRight from '/icons/chevron-right.svg';
-import chevronDoubleRight from '/icons/chevron-double-right.svg';
-
-import './styles.scss';
+import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/reducers/rootReducer';
 import {
@@ -11,9 +6,18 @@ import {
   IPaginationProps,
 } from '@interfaces/pagination.interface';
 import { setPaginationOptions } from '@/redux/slices/pagination.slice';
-import { FC, useEffect } from 'react';
+import chevronLeft from '/icons/chevron-left.svg';
+import chevronDoubleLeft from '/icons/chevron-double-left.svg';
+import chevronRight from '/icons/chevron-right.svg';
+import chevronDoubleRight from '/icons/chevron-double-right.svg';
 
-const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
+import './styles.scss';
+
+const Pagination: FC<IPaginationProps> = ({
+  todos,
+  currentTodosAmount, // current page todo list length
+}: IPaginationProps) => {
+  // pagination options from Redux store
   const { paginationOptions } = useSelector(
     (state: RootState) => state.paginationOptions,
   );
@@ -21,23 +25,34 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
   const { currentPage, totalPages, offset, size, limit, limitOptions } =
     paginationOptions;
 
+  // Update pagination options in Redux store
   const handlePagination = (option: IPaginationOption) => {
     dispatch(setPaginationOptions(option));
   };
 
   useEffect(() => {
     const todoSize = todos?.length || 0;
-    handlePagination({
+
+    // calculate new pagination options
+    const newPaginationOptions = {
       ...paginationOptions,
       size: todoSize,
+      offset:
+        currentTodosAmount === 0 && offset >= limit ? offset - limit : offset,
+      currentPage:
+        currentTodosAmount === 0 && offset >= limit
+          ? currentPage - 1
+          : currentPage,
       totalPages: Math.ceil(todoSize / limit),
-    });
-  }, [todos, limit]);
+    };
+
+    handlePagination(newPaginationOptions);
+  }, [todos, limit, currentTodosAmount]);
 
   return (
     <div className="pagination">
       <div className="page-items">
-        <span> Items per page </span>
+        <span>Items per page</span>
         <select
           value={limit}
           onChange={(e) =>
@@ -52,8 +67,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
         >
           {limitOptions.map((option: number) => (
             <option value={option} key={option}>
-              {' '}
-              {option}{' '}
+              {option}
             </option>
           ))}
         </select>
@@ -61,12 +75,12 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
 
       <div className="item-count">
         <span>
-          {' '}
-          {currentPage} / {Math.ceil(totalPages) || 1}{' '}
+          {currentPage} / {Math.ceil(totalPages) || 1}
         </span>
       </div>
 
       <div className="actions">
+        {/* Handle First Page */}
         <button
           disabled={offset === 0}
           onClick={() =>
@@ -79,6 +93,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
         >
           <img src={chevronDoubleLeft} alt="chevron-double-left" />
         </button>
+        {/* Handle Previous Page */}
         <button
           disabled={offset === 0}
           onClick={() =>
@@ -91,6 +106,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
         >
           <img src={chevronLeft} alt="chevron-left" />
         </button>
+        {/* Handle Next Page */}
         <button
           disabled={offset + limit >= size}
           onClick={() =>
@@ -103,6 +119,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
         >
           <img src={chevronRight} alt="chevron-right" />
         </button>
+        {/* Handle Last Page */}
         <button
           disabled={offset + limit >= size}
           onClick={() =>
@@ -113,7 +130,7 @@ const Pagination: FC<IPaginationProps> = ({ todos }: IPaginationProps) => {
             })
           }
         >
-          <img src={chevronDoubleRight} alt="chevron-double-left" />
+          <img src={chevronDoubleRight} alt="chevron-double-right" />
         </button>
       </div>
     </div>
