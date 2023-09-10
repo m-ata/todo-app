@@ -11,7 +11,7 @@ import { setTodo } from '@redux/slices/todo.slice';
 // import interfaces
 import { ITodo, RTKQueryResponse } from '@/interfaces/todo.interface';
 // import util
-import { getApiError } from '@utils/apiError.utils';
+import { getApiError } from '@/utils/apiError.util';
 // import style
 import './styles.scss';
 
