@@ -1,17 +1,17 @@
 import { FC } from 'react';
-import { ITodo, ITableProps } from '@/interfaces/todo.interface';
-import deleteIcon from '/icons/delete.svg';
-import editIcon from '/icons/edit.svg';
-import checkIcon from '/icons/check.svg';
-import './styles.scss';
-import { parseDateStringFormat } from '@/utils/date.util';
-import { getStatus } from '@/utils/status.util';
-import EmptyData from '@components/EmptyData';
-import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 
+import { ITodo, ITableProps } from '@interfaces/todo.interface';
+
+import EmptyData from '@components/EmptyData';
+import TodoItem from '@components/TodoItem';
+
+import './styles.scss';
+
+// Table component that displays a table of todos.
 const Table: FC<ITableProps> = ({
   columns,
   data,
+  isMobile,
   handleUpsert,
 }: ITableProps) => {
   return (
@@ -25,46 +25,18 @@ const Table: FC<ITableProps> = ({
           </tr>
         </thead>
         <tbody>
+          {/* Map over the todo data and render a TodoItem component for each todo. */}
           {data.map((item: ITodo) => (
-            <tr key={item.id}>
-              <td>{item.task}</td>
-              <td>{parseDateStringFormat(item.deadline || 0)}</td>
-              <td>
-                {' '}
-                <span className={`status ${getStatus(item)}`}>
-                  {' '}
-                  {getStatus(item)}{' '}
-                </span>
-              </td>
-              <td>
-                <button
-                  type="button"
-                  className={`icon-btn delete`}
-                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.DELETE)}
-                >
-                  <img src={deleteIcon} alt={'delete-icon'} />
-                </button>
-                <button
-                  disabled={item.isCompleted}
-                  type="button"
-                  className={`icon-btn edit`}
-                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.EDIT)}
-                >
-                  <img src={editIcon} alt={'edit-icon'} />
-                </button>
-                <button
-                  type="button"
-                  disabled={item.isCompleted}
-                  className={`icon-btn check`}
-                  onClick={() => handleUpsert(item, UPSERT_TODO_TYPE.COMPLETE)}
-                >
-                  <img src={checkIcon} alt={'check-icon'} />
-                </button>
-              </td>
-            </tr>
+            <TodoItem
+              key={item.id}
+              todo={item}
+              isMobile={isMobile}
+              handleUpsert={handleUpsert}
+            />
           ))}
         </tbody>
       </table>
+      {/* Display EmptyData component if there is no todos in the data */}
       {!data.length && <EmptyData />}
     </>
   );

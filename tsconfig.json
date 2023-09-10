@@ -33,7 +33,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@redux/*": ["src/redux/*"],
       "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src"]
 }

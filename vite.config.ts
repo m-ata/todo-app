@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from "path";
+import path from 'path';
 import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables from .env file
@@ -17,7 +17,8 @@ export default defineConfig({
       '@interfaces': path.resolve(__dirname, './src/interfaces/'),
       '@redux': path.resolve(__dirname, './src/redux/'),
       '@utils': path.resolve(__dirname, './src/utils/'),
-    }
+      '@hooks': path.resolve(__dirname, './src/hooks/'),
+    },
   },
   css: {
     preprocessorOptions: {
@@ -27,10 +28,10 @@ export default defineConfig({
         @import "./src/styles/global.scss";
         @import "./src/styles/mixins.scss";
         `,
-      }
-    }
+      },
+    },
   },
   server: {
     port,
-  }
+  },
 });
