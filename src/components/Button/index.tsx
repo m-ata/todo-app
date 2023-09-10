@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { IButtonProps } from '@/interfaces/button.interface';
-import Loader from '/gifs/loader.svg';
+import Spinner from '/gifs/spinner.svg';
 import './styles.scss';
 
 const Button: FC<IButtonProps> = (props: IButtonProps) => {
@@ -19,7 +19,7 @@ const Button: FC<IButtonProps> = (props: IButtonProps) => {
       onClick={onClick}
       disabled={isLoading}
     >
-      {isLoading && <img src={Loader} alt="loader" />}
+      {isLoading && <img src={Spinner} alt="loader" />}
       {icon && <img src={icon} alt="icon" />}
       <span>{label}</span>
     </button>

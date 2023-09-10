@@ -6,7 +6,7 @@ import checkIcon from '/icons/check.svg';
 import { FC, memo } from 'react';
 import { parseDateStringFormat } from '@/utils/date.util';
 import './styles.scss';
-import { useStatus } from '@/hooks/useStatus';
+import { useStatus } from '@hooks/useStatus';
 
 const TodoItem: FC<ITodoItem> = memo(
   ({ todo, isMobile, handleUpsert }: ITodoItem) => {

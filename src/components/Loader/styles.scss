@@ -1,0 +1,16 @@
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  backdrop-filter: blur(1px);
+  z-index: 1000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100px;
+  }
+}
