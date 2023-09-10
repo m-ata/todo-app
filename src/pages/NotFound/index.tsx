@@ -1,12 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+// import component
+import Button from '@components/Button';
+// import enum
 import { HTTP_STATUS_CODES } from '@/enum/status.enum';
-import './styles.scss';
+// import constants
 import {
   GO_HOME_BUTTON,
   NOT_FOUND_DESCRIPTION,
   PAGE_NOT_FOUND,
 } from '@/constants/label.constants';
-import Button from '@components/Button';
-import { useNavigate } from 'react-router-dom';
+// import styles
+import './styles.scss';
 
 const NotFound = () => {
   const navigate = useNavigate();
