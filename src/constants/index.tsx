@@ -44,3 +44,8 @@ export const SUCCESS_MESSAGES = {
   DELETED: 'Deleted successfully',
   COMPLETED: 'Marked as completed'
 };
+
+export const TOAST_AUTO_CLOSE = {
+  SUCCESS: 1000,
+  ERROR: 3000,
+};
