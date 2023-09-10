@@ -3,6 +3,7 @@ import { SubmitHandler } from "react-hook-form";
 export interface IConfirmationModalProps {
     heading: string;
     content: string;
+    isApplying?: boolean;
     onApply: React.MouseEventHandler<HTMLButtonElement>;
     onClose: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -17,4 +18,5 @@ export interface IFormsModalProps {
     onSubmit: SubmitHandler<IFormInputs>;
     formValues: IFormInputs;
     heading: string;
+    isFormSubmitting?: boolean;
 }

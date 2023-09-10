@@ -14,6 +14,7 @@ const FormsModal: FC<IFormsModalProps> = ({
   onSubmit,
   formValues,
   heading,
+  isFormSubmitting,
 }: IFormsModalProps) => {
   // Initialize React Hook Form
   const {
@@ -116,7 +117,7 @@ const FormsModal: FC<IFormsModalProps> = ({
               type="date"
               {...register('deadline')}
               // disable past date
-              min={new Date().toISOString().split('T')[0]}
+              min={new Date(Date.now()).toISOString().split('T')[0]}
             />
             {errors.deadline && (
               <p className="error"> {errors.deadline.message} </p>
@@ -124,7 +125,7 @@ const FormsModal: FC<IFormsModalProps> = ({
           </div>
           <div className="actions">
             <Button label="Cancel" onClick={onClose} category="secondary" />
-            <Button label="Save" type="submit" />
+            <Button label="Save" type="submit" isLoading={isFormSubmitting} />
           </div>
         </form>
       </div>

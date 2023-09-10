@@ -1,5 +1,5 @@
 // imports from react
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { SubmitHandler } from 'react-hook-form';
@@ -27,6 +27,8 @@ import {
 import { EDIT_TODO } from '@/constants/label.constants';
 
 const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useDispatch();
   const [updateTodoMutation] = useUpdateTodoMutation();
 
@@ -41,6 +43,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
     formData: IFormInputs,
   ) => {
     try {
+      setIsLoading(true);
       const { task, deadline } = formData;
       const updatedTodo: ITodo = {
         ...todo,
@@ -61,10 +64,12 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
         toast.error(getApiError(error), {
           autoClose: TOAST_AUTO_CLOSE.ERROR,
         });
+      setIsLoading(false);
     } catch (err) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
         autoClose: TOAST_AUTO_CLOSE.ERROR,
       });
+      setIsLoading(false);
     }
   };
 
@@ -74,6 +79,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
       formValues={defaultFormValues}
       onClose={onClose}
       onSubmit={submitHandler}
+      isFormSubmitting={isLoading}
     />
   );
 };
