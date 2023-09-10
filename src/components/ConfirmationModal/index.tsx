@@ -11,6 +11,7 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
   content,
   onClose,
   onApply,
+  isApplying
 }: IConfirmationModalProps) => {
   return (
     <>
@@ -30,7 +31,7 @@ const ConfirmationModal: FC<IConfirmationModalProps> = ({
             category="secondary"
             type="button"
           />
-          <Button label="OK" onClick={onApply} type="button" />
+          <Button label="OK" disabled={isApplying} onClick={onApply} type="button" />
         </div>
       </div>
       <div className="overlay" />

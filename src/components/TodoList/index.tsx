@@ -49,6 +49,7 @@ const TodoList = () => {
   const [showDeleteTodoModal, setShowDeleteTodoModal] =
     useState<boolean>(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedTodo, setSelectedTodo] = useState<ITodo>(DEFAULT_TODO);
 
   // redux states
@@ -95,6 +96,7 @@ const TodoList = () => {
   const handleUpdateTodo = useCallback(async () => {
     try {
       if (showCompleteTodoModal) {
+        setIsLoading(true);
         const updatedTodo = {
           ...selectedTodo,
           isCompleted: true,
@@ -113,12 +115,14 @@ const TodoList = () => {
           toast.error(getApiError(error), {
             autoClose: TOAST_AUTO_CLOSE.ERROR,
           });
+        setIsLoading(false);
       } else setShowEditTodoModal(false);
       setSelectedTodo(DEFAULT_TODO);
     } catch (error) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
         autoClose: TOAST_AUTO_CLOSE.ERROR,
       });
+      setIsLoading(false);
     }
   }, [selectedTodo, showCompleteTodoModal, showEditTodoModal]);
 
@@ -126,6 +130,7 @@ const TodoList = () => {
   const handleDeleteTodo = useCallback(async () => {
     try {
       if (selectedTodo?.id) {
+        setIsLoading(true);
         const { data, error } = (await deleteTodoMutation(
           selectedTodo.id,
         )) as RTKQueryResponse; // call api using RTK deleteTodoMutation
@@ -141,12 +146,14 @@ const TodoList = () => {
           toast.error(getApiError(error), {
             autoClose: TOAST_AUTO_CLOSE.ERROR,
           });
+        setIsLoading(false);
       }
       setSelectedTodo(DEFAULT_TODO);
     } catch (err) {
       toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
         autoClose: TOAST_AUTO_CLOSE.ERROR,
       });
+      setIsLoading(false);
     }
   }, [selectedTodo, showDeleteTodoModal]);
 
@@ -173,6 +180,7 @@ const TodoList = () => {
         <ConfirmationModal
           heading={COMPLETE_TODO_CONFIRMATION_HEADING}
           content={COMPLETE_TODO_CONFIRMATION_CONTENT}
+          isApplying={isLoading}
           onClose={() => setShowCompleteTodoModal(!showCompleteTodoModal)}
           onApply={handleUpdateTodo}
         />
@@ -181,6 +189,7 @@ const TodoList = () => {
         <ConfirmationModal
           heading={DELETE_TODO_CONFIRMATION_HEADING}
           content={DELETE_TODO_CONFIRMATION_CONTENT}
+          isApplying={isLoading}
           onClose={() => setShowDeleteTodoModal(!showDeleteTodoModal)}
           onApply={handleDeleteTodo}
         />

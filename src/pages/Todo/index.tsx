@@ -16,10 +16,11 @@ import { getApiError } from '@/utils/apiError.util';
 import { TOAST_AUTO_CLOSE } from '@/constants';
 // import style
 import './styles.scss';
+import withLoading from '@hoc/withLoading';
 
 const Todo = () => {
   // api call using RTK Query to get todos
-  const { data, error } = useGetTodosQuery() as RTKQueryResponse;
+  const { data, error, isLoading } = useGetTodosQuery() as RTKQueryResponse;
 
   const dispatch = useDispatch();
 
@@ -35,7 +36,7 @@ const Todo = () => {
   return (
     <div className="container">
       <Header />
-      <TodoList />
+      {withLoading(TodoList, isLoading)({isLoading})}
     </div>
   );
 };
