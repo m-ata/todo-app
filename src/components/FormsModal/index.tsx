@@ -29,29 +29,49 @@ const FormsModal: FC<IFormsModalProps> = ({
   const validateForm = (data: IFormInputs): boolean => {
     let isFormValid = true;
 
-    if (data.deadline.trim() === '') { // deadline is empty
+    if (data.deadline.trim() === '') {
+      // deadline is empty
       isFormValid = false;
-      setError('deadline', {
-        type: 'required',
-        message: 'Deadline is required',
-      }, { shouldFocus: true });
+      setError(
+        'deadline',
+        {
+          type: 'required',
+          message: 'Deadline is required',
+        },
+        { shouldFocus: true },
+      );
     }
 
-    if (data.task.trim() === '') { // task is empty
+    if (data.task.trim() === '') {
+      // task is empty
       isFormValid = false;
-      setError('task', { type: 'required', message: 'Task is required' }, { shouldFocus: true });
-    } else if (data.task.length < 10) { // task is too short
+      setError(
+        'task',
+        { type: 'required', message: 'Task is required' },
+        { shouldFocus: true },
+      );
+    } else if (data.task.length < 10) {
+      // task is too short
       isFormValid = false;
-      setError('task', {
-        type: 'minLength',
-        message: 'Task must be at least 10 characters long',
-      }, { shouldFocus: true });
-    } else if (data.task.length > 100) { // task is too long
+      setError(
+        'task',
+        {
+          type: 'minLength',
+          message: 'Task must be at least 10 characters long',
+        },
+        { shouldFocus: true },
+      );
+    } else if (data.task.length > 100) {
+      // task is too long
       isFormValid = false;
-      setError('task', {
-        type: 'maxLength',
-        message: 'Task must be less than or equal to 100 characters',
-      }, { shouldFocus: true });
+      setError(
+        'task',
+        {
+          type: 'maxLength',
+          message: 'Task must be less than or equal to 100 characters',
+        },
+        { shouldFocus: true },
+      );
     }
 
     return isFormValid;
@@ -79,14 +99,12 @@ const FormsModal: FC<IFormsModalProps> = ({
             <label>
               Task <span> * </span>
             </label>
-            <input
-              {...register('task')}
-              placeholder="Write a task"
-            />
+            <input {...register('task')} placeholder="Write a task" />
             {errors.task?.type === 'required' && (
               <p className="error"> {errors.task.message} </p>
             )}
-            {(errors.task?.type === 'minLength' || errors.task?.type === 'maxLength') && (
+            {(errors.task?.type === 'minLength' ||
+              errors.task?.type === 'maxLength') && (
               <p className="error"> {errors.task.message} </p>
             )}
           </div>
@@ -94,7 +112,12 @@ const FormsModal: FC<IFormsModalProps> = ({
             <label>
               Deadline <span> * </span>
             </label>
-            <input type="date" {...register('deadline')} />
+            <input
+              type="date"
+              {...register('deadline')}
+              // disable past date
+              min={new Date().toISOString().split('T')[0]}
+            />
             {errors.deadline && (
               <p className="error"> {errors.deadline.message} </p>
             )}
@@ -111,8 +134,3 @@ const FormsModal: FC<IFormsModalProps> = ({
 };
 
 export default FormsModal;
-
-
-
-
-

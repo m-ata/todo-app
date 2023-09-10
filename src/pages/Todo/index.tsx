@@ -12,6 +12,8 @@ import { setTodo } from '@redux/slices/todo.slice';
 import { ITodo, RTKQueryResponse } from '@/interfaces/todo.interface';
 // import util
 import { getApiError } from '@/utils/apiError.util';
+// import constant
+import { TOAST_AUTO_CLOSE } from '@/constants';
 // import style
 import './styles.scss';
 
@@ -25,7 +27,9 @@ const Todo = () => {
   useEffect(() => {
     if (data) dispatch(setTodo(data as ITodo[])); // setting todo in store
     // showing error in toast
-    if (error) toast.error(getApiError(error));
+    if (error) toast.error(getApiError(error), {
+      autoClose: TOAST_AUTO_CLOSE.ERROR,
+    });
   }, [data, error]);
 
   return (

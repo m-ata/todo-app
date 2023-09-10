@@ -1,3 +1,4 @@
+// import from react
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -24,6 +25,7 @@ import {
   DEFAULT_TODO,
   ERROR_MESSAGES,
   SUCCESS_MESSAGES,
+  TOAST_AUTO_CLOSE,
 } from '@/constants';
 // import interfaces
 import {
@@ -102,14 +104,21 @@ const TodoList = () => {
         )) as RTKQueryResponse; // call api using RTK updateTodoMutation
         if (data) {
           dispatch(updateTodo(data as ITodo)); // update completed todo in store
-          toast.success(SUCCESS_MESSAGES.COMPLETED);
+          toast.success(SUCCESS_MESSAGES.COMPLETED, {
+            autoClose: TOAST_AUTO_CLOSE.SUCCESS,
+          });
           setShowCompleteTodoModal(false);
         }
-        if (error) toast.error(getApiError(error));
+        if (error)
+          toast.error(getApiError(error), {
+            autoClose: TOAST_AUTO_CLOSE.ERROR,
+          });
       } else setShowEditTodoModal(false);
       setSelectedTodo(DEFAULT_TODO);
     } catch (error) {
-      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
+        autoClose: TOAST_AUTO_CLOSE.ERROR,
+      });
     }
   }, [selectedTodo, showCompleteTodoModal, showEditTodoModal]);
 
@@ -123,14 +132,21 @@ const TodoList = () => {
         const response = data as IDeleteResponse;
         if (response.success) {
           dispatch(deleteTodo(response.id)); // delete todo from store
-          toast.success(SUCCESS_MESSAGES.DELETED);
+          toast.success(SUCCESS_MESSAGES.DELETED, {
+            autoClose: TOAST_AUTO_CLOSE.SUCCESS,
+          });
           setShowDeleteTodoModal(!showDeleteTodoModal);
         }
-        if (error) toast.error(getApiError(error));
+        if (error)
+          toast.error(getApiError(error), {
+            autoClose: TOAST_AUTO_CLOSE.ERROR,
+          });
       }
       setSelectedTodo(DEFAULT_TODO);
     } catch (err) {
-      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
+        autoClose: TOAST_AUTO_CLOSE.ERROR,
+      });
     }
   }, [selectedTodo, showDeleteTodoModal]);
 

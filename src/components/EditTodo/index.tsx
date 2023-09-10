@@ -19,7 +19,11 @@ import { IFormInputs } from '@interfaces/modal.interface';
 import { parseDateToTimestamp } from '@utils/date.util';
 import { getApiError } from '@/utils/apiError.util';
 // import constants
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
+import {
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+  TOAST_AUTO_CLOSE,
+} from '@/constants';
 import { EDIT_TODO } from '@/constants/label.constants';
 
 const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
@@ -48,12 +52,19 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
       )) as RTKQueryResponse;
       if (data) {
         dispatch(updateTodo(data as ITodo)); // update todo in store
-        toast.success(SUCCESS_MESSAGES.UPDATED);
+        toast.success(SUCCESS_MESSAGES.UPDATED, {
+          autoClose: TOAST_AUTO_CLOSE.SUCCESS,
+        });
         onClose();
       }
-      if (error) toast.error(getApiError(error));
+      if (error)
+        toast.error(getApiError(error), {
+          autoClose: TOAST_AUTO_CLOSE.ERROR,
+        });
     } catch (err) {
-      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
+        autoClose: TOAST_AUTO_CLOSE.ERROR,
+      });
     }
   };
 

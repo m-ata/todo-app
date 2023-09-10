@@ -1,3 +1,4 @@
+// import from react
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { SubmitHandler } from 'react-hook-form';
@@ -18,7 +19,11 @@ import { getApiError } from '@/utils/apiError.util';
 import { useAddTodoMutation } from '@redux/services/todo.service';
 import { addTodo } from '@redux/slices/todo.slice';
 // import constants
-import { ERROR_MESSAGES, SUCCESS_MESSAGES } from '@/constants';
+import {
+  ERROR_MESSAGES,
+  SUCCESS_MESSAGES,
+  TOAST_AUTO_CLOSE,
+} from '@/constants';
 import { ADD_TODO } from '@/constants/label.constants';
 
 const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
@@ -47,12 +52,19 @@ const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
       )) as RTKQueryResponse; // call api using RTK addTodoMutation
       if (data) {
         dispatch(addTodo(data as ITodo)); // dispatch the response
-        toast.success(SUCCESS_MESSAGES.SAVED);
+        toast.success(SUCCESS_MESSAGES.SAVED, {
+          autoClose: TOAST_AUTO_CLOSE.SUCCESS,
+        });
         onClose();
       }
-      if (error) toast.error(getApiError(error));
+      if (error)
+        toast.error(getApiError(error), {
+          autoClose: TOAST_AUTO_CLOSE.ERROR,
+        });
     } catch (err) {
-      toast.error(ERROR_MESSAGES.SOMETHING_WRONG);
+      toast.error(ERROR_MESSAGES.SOMETHING_WRONG, {
+        autoClose: TOAST_AUTO_CLOSE.ERROR,
+      });
     }
   };
 
