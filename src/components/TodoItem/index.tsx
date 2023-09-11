@@ -7,7 +7,7 @@ import checkIcon from '/icons/check.svg';
 import { UPSERT_TODO_TYPE } from '@/enum/upsert-todo.enum';
 import { ITodoItem } from '@interfaces/todo.interface';
 // import required utils
-import { parseDateStringFormat } from '@/utils/date.util';
+import { parseISODateToStringFormat } from '@/utils/date.util';
 // import custom hooks
 import { useStatus } from '@hooks/useStatus';
 // import constants
@@ -24,7 +24,7 @@ const TodoItem: FC<ITodoItem> = memo(
       return (
         <tr key={todo.id}>
           <td>{todo.task}</td>
-          <td>{parseDateStringFormat(todo.deadline || 0)}</td>
+          <td>{parseISODateToStringFormat(todo.deadline || 0)}</td>
           <td>
             {' '}
             <span className={`status ${status}`}> {status} </span>
@@ -98,7 +98,7 @@ const TodoItem: FC<ITodoItem> = memo(
             <hr />
             <div className="group">
               <h5> {DEADLINE} </h5>
-              <span>{parseDateStringFormat(todo.deadline)}</span>
+              <span>{parseISODateToStringFormat(todo.deadline)}</span>
             </div>
           </div>
         </div>

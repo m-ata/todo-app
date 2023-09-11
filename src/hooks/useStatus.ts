@@ -11,7 +11,7 @@ export const useStatus = (todo: ITodo): string => {
   const status = useMemo(() => {
     if (todo?.isCompleted) {
       return STATUS.COMPLETED;
-    } else if (todo?.deadline < Date.now()) {
+    } else if (todo?.deadline < new Date(+Date.now()).toISOString()) {
       // check todo deadline is less than current timestamp
       return STATUS.OVERDUE;
     } else {

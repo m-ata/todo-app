@@ -30,6 +30,7 @@ export const DELETE_TODO_CONFIRMATION_HEADING = 'Delete Task';
 export const DELETE_TODO_CONFIRMATION_CONTENT =
   'Are you sure, you want to delete this task?';
 
+export const INVALID_DATE = 'Invalid Date';
 export const ERROR_MESSAGES = {
   NOT_FOUND: 'Resource not found.',
   INTERNAL_ERROR: 'Internal Server Error',

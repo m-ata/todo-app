@@ -1,25 +1,34 @@
-import { parseDateToTimestamp, parseDateStringFormat } from '../../../src/utils/date.util';
+import { parseISODateToDayEnd, parseISODateToStringFormat } from '../../../src/utils/date.util';
+import { INVALID_DATE } from '../../../src/constants';
 
-describe('parseDateToTimestamp', () => {
-  it('parses a valid date string to a timestamp', () => {
-    const dateStr = '2023-09-15';
-    const expectedTimestamp = new Date(dateStr + 'T23:59:59.999').getTime();
-    const result = parseDateToTimestamp(dateStr);
-    expect(result).toBe(expectedTimestamp);
+describe('parseISODateToDayEnd', () => {
+  it('parses an ISO date string to the end of the day in ISO format', () => {
+    const isoDateString = '2023-09-11T12:34:56.789Z';
+    const result = parseISODateToDayEnd(isoDateString);
+
+    expect(result).toMatch(/^2023-09-11T23:59:59.999Z$/);
   });
 
-  it('returns the current timestamp for an invalid date string', () => {
-    const invalidDateStr = 'invalid-date';
-    const result = parseDateToTimestamp(invalidDateStr);
-    expect(result).toBeCloseTo(Date.now(), -3); // nearly close to current timestamp
+  it('returns the current date in ISO format for an invalid input', () => {
+    const invalidDateString = 'invalid-date';
+    const result = parseISODateToDayEnd(invalidDateString);
+
+    expect(result).toBe(new Date(+Date.now()).toISOString());
   });
 });
 
-describe('parseDateStringFormat', () => {
-  it('parses a timestamp into a formatted date string', () => {
-    const timestamp = 1758022400000; // September 16, 2025
-    const expectedFormattedDate = '16.09.2025';
-    const result = parseDateStringFormat(timestamp);
-    expect(result).toBe(expectedFormattedDate);
+describe('parseISODateToStringFormat', () => {
+  it('parses an ISO date string to a formatted date string', () => {
+    const isoDateString = '2023-09-11T12:34:56.789Z';
+    const result = parseISODateToStringFormat(isoDateString);
+
+    expect(result).toBe('11.09.2023');
+  });
+
+  it('returns an invalid date message for an invalid input', () => {
+    const invalidDateString = 'invalid-date';
+    const result = parseISODateToStringFormat(invalidDateString);
+
+    expect(result).toBe(INVALID_DATE);
   });
 });
