@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "types": ["vite/client", "@testing-library/jest-dom", "jest"],
+    "types": ["vite/client", "@testing-library/jest-dom", "jest", "react"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -37,5 +37,5 @@
       "@hoc/*": ["src/hoc/*"],
     }
   },
-  "include": ["src"]
+  "include": ["src", "./__tests__"]
 }
