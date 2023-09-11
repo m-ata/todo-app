@@ -3,7 +3,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
 export interface ITodo {
   id?: number;
   task: string;
-  deadline: number; // timestamp
+  deadline: string;
   isCompleted: boolean;
 }
 

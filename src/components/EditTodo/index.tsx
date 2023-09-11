@@ -16,7 +16,7 @@ import {
 } from '@interfaces/todo.interface';
 import { IFormInputs } from '@interfaces/modal.interface';
 // import required utils
-import { parseDateToTimestamp } from '@utils/date.util';
+import { parseISODateToDayEnd } from '@utils/date.util';
 import { getApiError } from '@/utils/apiError.util';
 // import constants
 import {
@@ -35,7 +35,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
   // default values for edit todo form
   const defaultFormValues: IFormInputs = {
     task: todo.task,
-    deadline: new Date(+todo.deadline).toISOString().split('T')[0],
+    deadline: new Date(todo.deadline).toISOString().split('T')[0],
   };
 
   // submit handler for edit todo form
@@ -48,7 +48,7 @@ const EditTodo: FC<IEditTodoProps> = ({ onClose, todo }: IEditTodoProps) => {
       const updatedTodo: ITodo = {
         ...todo,
         task,
-        deadline: parseDateToTimestamp(deadline),
+        deadline: parseISODateToDayEnd(new Date(deadline).toISOString()),
       };
       const { data, error } = (await updateTodoMutation(
         updatedTodo,
