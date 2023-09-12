@@ -16,21 +16,14 @@ export const DEFAULT_PAGINATION_OPTIONS = {
 export const DEFAULT_TODO = {
   id: 0,
   task: '',
-  deadline: 0,
+  deadline: '',
   isCompleted: false,
 };
 
 export const TODO_COLUMNS = ['Task', 'Deadline', 'Status', 'Actions'];
 
-export const COMPLETE_TODO_CONFIRMATION_HEADING = 'Complete Task';
-export const COMPLETE_TODO_CONFIRMATION_CONTENT =
-  'Are you sure, this task is completed?';
-
-export const DELETE_TODO_CONFIRMATION_HEADING = 'Delete Task';
-export const DELETE_TODO_CONFIRMATION_CONTENT =
-  'Are you sure, you want to delete this task?';
-
 export const INVALID_DATE = 'Invalid Date';
+
 export const ERROR_MESSAGES = {
   NOT_FOUND: 'Resource not found.',
   INTERNAL_ERROR: 'Internal Server Error',
@@ -43,7 +36,7 @@ export const SUCCESS_MESSAGES = {
   SAVED: 'Saved successfully',
   UPDATED: 'Updated successfully',
   DELETED: 'Deleted successfully',
-  COMPLETED: 'Marked as completed'
+  COMPLETED: 'Marked as completed',
 };
 
 export const TOAST_AUTO_CLOSE = {

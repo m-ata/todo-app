@@ -9,6 +9,8 @@ import plusIcon from '/icons/plus.svg';
 import todoListImage from '/images/todo-list.svg';
 //redux related import
 import { RootState } from '@/redux/reducers/rootReducer';
+// import constant
+import { TODO_APP_LABEL } from '@/constants/label.constants';
 // import style
 import './styles.scss';
 
@@ -26,7 +28,7 @@ const Header = () => {
       <header className="app-header">
         <div className="logo-container">
           <img className="logo" src={todoListImage} alt="todo-list" />
-          <div className="heading"> Todo App {todos?.length > 0 && <span> ({todos.length}) </span>}  </div>
+          <div className="heading"> {TODO_APP_LABEL} {todos?.length > 0 && <span> ({todos.length}) </span>}  </div>
         </div>
         <div className="btn-container">
           <Button

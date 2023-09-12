@@ -24,7 +24,7 @@ const TodoItem: FC<ITodoItem> = memo(
       return (
         <tr key={todo.id}>
           <td>{todo.task}</td>
-          <td>{parseISODateToStringFormat(todo.deadline || 0)}</td>
+          <td>{parseISODateToStringFormat(todo.deadline || '')}</td>
           <td>
             {' '}
             <span className={`status ${status}`}> {status} </span>
