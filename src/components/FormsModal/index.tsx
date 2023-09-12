@@ -7,6 +7,8 @@ import Button from '@components/Button';
 import { IFormInputs, IFormsModalProps } from '@interfaces/modal.interface';
 //import style
 import './styles.scss';
+// import constant
+import { DEADLINE, TASK } from '@/constants/label.constants';
 
 // Forms Modal to handle Todo forms, it's submission and validation
 const FormsModal: FC<IFormsModalProps> = ({
@@ -98,9 +100,9 @@ const FormsModal: FC<IFormsModalProps> = ({
         <form onSubmit={handleSubmit(onSubmitForm)}>
           <div className={`input-group ${errors.task ? 'error' : ''}`}>
             <label>
-              Task <span> * </span>
+              {TASK} <span> * </span>
             </label>
-            <input {...register('task')} placeholder="Write a task" />
+            <input autoComplete='off' {...register('task')} placeholder="Write a task" />
             {errors.task?.type === 'required' && (
               <p className="error"> {errors.task.message} </p>
             )}
@@ -111,7 +113,7 @@ const FormsModal: FC<IFormsModalProps> = ({
           </div>
           <div className={`input-group ${errors.deadline ? 'error' : ''}`}>
             <label>
-              Deadline <span> * </span>
+              {DEADLINE} <span> * </span>
             </label>
             <input
               type="date"
