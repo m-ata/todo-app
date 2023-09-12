@@ -24,9 +24,18 @@ const config: Config = {
   setupFilesAfterEnv: [`${__dirname}/setupTests.ts`],
   testPathIgnorePatterns: [
     '/node_modules/',
-    // ignore this mock file since it is used for svgs imports in jest
+    // ignore these mock file
     '/__tests__/mock/file-mock.ts',
+    '/__tests__/mock/MockProvider.test.tsx',
+    '/__tests__/mock/data.ts',
+    '/__tests__/mock/api/server.ts',
+    '/__tests__/mock/api/handlers.ts',
   ],
+  globals: {
+    'import.meta': {
+      VITE_API_URL: 'http://localhost:5147/api',
+    },
+  },
 };
 
 export default config;
