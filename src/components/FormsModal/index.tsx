@@ -53,25 +53,25 @@ const FormsModal: FC<IFormsModalProps> = ({
         { type: 'required', message: 'Task is required' },
         { shouldFocus: true },
       );
-    } else if (data.task.length < 10) {
+    } else if (data.task.length <= 10) {
       // task is too short
       isFormValid = false;
       setError(
         'task',
         {
           type: 'minLength',
-          message: 'Task must be at least 10 characters long',
+          message: 'Task must be longer than 10 characters',
         },
         { shouldFocus: true },
       );
-    } else if (data.task.length > 100) {
+    } else if (data.task.length >= 100) {
       // task is too long
       isFormValid = false;
       setError(
         'task',
         {
           type: 'maxLength',
-          message: 'Task must be less than or equal to 100 characters',
+          message: 'Task must be less than 100 characters',
         },
         { shouldFocus: true },
       );
