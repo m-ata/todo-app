@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier --write ./src",
-    "test": "jest"
+    "test": "jest",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

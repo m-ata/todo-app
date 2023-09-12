@@ -37,5 +37,6 @@
       "@hoc/*": ["src/hoc/*"],
     }
   },
-  "include": ["src", "./__tests__", "env.d.ts"]
+  "include": ["src", "./__tests__", "env.d.ts"],
+  "type": "module",
 }
