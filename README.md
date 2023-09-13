@@ -31,8 +31,10 @@ PS: Before starting the development server, make sure the backend server is runn
 
 Follow these steps to run the tests locally.
 1. Make sure, you have setup the project locally.
-2. Run `npm run test` to run the test. (You might get error on `import.meta.env` on the console, please ignore it since jest is not independently compatible with vite. However, the test has already the coverage of more than 90% which is good enough).
+2. Run `npm run test` to run the test.
 3. Run `npm run test:coverage` to generate the coverage report locally.
+   
+Please note that you may encounter an error related to `import.meta.env` in the console when running the tests. This error should be ignored since Jest is not fully compatible with Vite. However, it's worth mentioning that despite this compatibility limitation, the tests have already achieved a coverage of more than 90%, which is considered acceptable.
 
 ## Implementation Detail
 - **Routing:** The application incorporates client-side routing with lazy loading for optimal performance. A router outlet, wrapped in suspense with a fallback for improved user experience, is utilized. The primary route is /todo, while any attempts to access arbitrary routes will automatically redirect users to the /404 route.
