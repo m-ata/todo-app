@@ -20,10 +20,14 @@ const todoSlice = createSlice({
       state.todos.push(action.payload);
     },
     updateTodo: (state, action: PayloadAction<ITodo>) => {
-      state.todos = state.todos.map((todo: ITodo) => todo.id === action.payload.id ? action.payload : todo);
+      state.todos = state.todos.map((todo: ITodo) =>
+        todo.id === action.payload.id ? action.payload : todo,
+      );
     },
     deleteTodo: (state, action: PayloadAction<number>) => {
-      state.todos = state.todos.filter((todo: ITodo) => todo.id !== action.payload);
+      state.todos = state.todos.filter(
+        (todo: ITodo) => todo.id !== action.payload,
+      );
     },
   },
 });

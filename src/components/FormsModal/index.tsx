@@ -102,7 +102,11 @@ const FormsModal: FC<IFormsModalProps> = ({
             <label>
               {TASK} <span> * </span>
             </label>
-            <input autoComplete='off' {...register('task')} placeholder="Write a task" />
+            <input
+              autoComplete="off"
+              {...register('task')}
+              placeholder="Write a task"
+            />
             {errors.task?.type === 'required' && (
               <p className="error"> {errors.task.message} </p>
             )}

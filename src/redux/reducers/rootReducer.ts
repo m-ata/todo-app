@@ -13,7 +13,7 @@ const persistTodos = {
 const rootReducer = combineReducers({
   todos: persistReducer(persistTodos, todosReducer),
   paginationOptions: paginationReducer,
-  [api.reducerPath]: api.reducer
+  [api.reducerPath]: api.reducer,
 });
 
 export default rootReducer;
