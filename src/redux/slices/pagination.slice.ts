@@ -3,7 +3,7 @@ import { IPaginationOption } from '@interfaces/pagination.interface';
 import { DEFAULT_PAGINATION_OPTIONS } from '@/constants';
 
 type InitialState = {
-    paginationOptions: IPaginationOption;
+  paginationOptions: IPaginationOption;
 };
 
 const initialState: InitialState = {

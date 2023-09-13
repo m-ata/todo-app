@@ -27,9 +27,8 @@ import {
 import { ADD_TODO } from '@/constants/label.constants';
 
 const AddTodo: FC<IAddTodoProps> = ({ onClose }: IAddTodoProps) => {
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  
+
   const dispatch = useDispatch();
   const [addTodoMutation] = useAddTodoMutation();
 

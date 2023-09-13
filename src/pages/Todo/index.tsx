@@ -28,15 +28,16 @@ const Todo = () => {
   useEffect(() => {
     if (data) dispatch(setTodo(data as ITodo[])); // setting todo in store
     // showing error in toast
-    if (error) toast.error(getApiError(error), {
-      autoClose: TOAST_AUTO_CLOSE.ERROR,
-    });
+    if (error)
+      toast.error(getApiError(error), {
+        autoClose: TOAST_AUTO_CLOSE.ERROR,
+      });
   }, [data, error]);
 
   return (
     <div className="container">
       <Header />
-      {withLoading(TodoList, isLoading)({isLoading})}
+      {withLoading(TodoList, isLoading)({ isLoading })}
     </div>
   );
 };

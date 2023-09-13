@@ -1,4 +1,4 @@
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 
 export interface ITodo {
   id?: number;
@@ -12,7 +12,7 @@ export interface IAddTodoProps {
 }
 
 export interface IEditTodoProps extends IAddTodoProps {
-  todo: ITodo
+  todo: ITodo;
 }
 
 export interface ICardProps {

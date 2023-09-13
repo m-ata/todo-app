@@ -15,7 +15,6 @@ import { TODO_APP_LABEL } from '@/constants/label.constants';
 import './styles.scss';
 
 const Header = () => {
-
   const [addTodoModalOpen, setAddTodoModalOpen] = useState(false);
 
   const { todos } = useSelector((state: RootState) => state.todos);
@@ -28,7 +27,11 @@ const Header = () => {
       <header className="app-header">
         <div className="logo-container">
           <img className="logo" src={todoListImage} alt="todo-list" />
-          <div className="heading"> {TODO_APP_LABEL} {todos?.length > 0 && <span> ({todos.length}) </span>}  </div>
+          <div className="heading">
+            {' '}
+            {TODO_APP_LABEL}{' '}
+            {todos?.length > 0 && <span> ({todos.length}) </span>}{' '}
+          </div>
         </div>
         <div className="btn-container">
           <Button

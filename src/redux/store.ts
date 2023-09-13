@@ -7,9 +7,9 @@ export const store = configureStore({
   reducer: rootReducer,
   devTools: true,
   middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware({
-        serializableCheck: false
-      }).concat(api.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(api.middleware),
 });
 
 export const persistor = persistStore(store);

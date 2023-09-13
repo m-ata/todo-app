@@ -1,4 +1,4 @@
-import { ITodo } from "./todo.interface";
+import { ITodo } from './todo.interface';
 
 export interface IPaginationOption {
   currentPage: number;
